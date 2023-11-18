@@ -1,2 +1,21 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<div class="countainer">
+  <div class="row">
+    <div class="col-md-2">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= genres.each do |genre| %>
+          <td><%= link_to genre.name, %></td>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="col-md-9 offset-md-1">
+      
+    </div>
+  </div>
+</div>
