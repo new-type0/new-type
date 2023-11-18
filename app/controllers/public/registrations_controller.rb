@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_permitted_parameters, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -60,15 +60,14 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-private
-  def customer_params
-    params.require(:customer).permit(:family_name, :last_name, :family_name_kana, :last_name_kana, :email, :postal_code, :address, :phone_number)
+  def after_sign_up_path_for(public)
+    public_customers_show_path(current_user)
   end
 
-  # protected
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:family_name, :last_name, :family_name_kana, :last_name_kana, :email, :postal_code, :address, :phone_number])
-  # end
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:family_name, :last_name, :family_name_kana, :last_name_kana, :email, :postal_code, :address, :phone_number])
+  end
 
 
 end
