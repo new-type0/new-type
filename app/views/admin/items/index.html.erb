@@ -20,8 +20,19 @@
       <%= f.text_area :introduction, rows: "5", class: "w-full rounded-md border border-gray-300 py-2 px-3 placeholder:text-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100" %>
     </div>
     <div class="mb-6">
+      <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい" %>
+    </div>
+    <div class="mb-6">
       <%= f.label :tax_included_price, class: "mb-2 block text-sm text-gray-600" %>
       <%= f.number_field :tax_included_price, class: "w-full rounded-md border border-gray-300 py-2 px-3 placeholder:text-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100" %>
+    </div>
+    <div class="mb-6">
+      <%= form_with model: @item do |f| %>
+        <%= f.radio_button :is_saled, true %>
+        <%= f.label :is_saled, "販売中", {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :is_saled, false %>
+        <%= f.label :is_saled, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+      <% end %>
     </div>
 
 
