@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  root to: 'public/homes#top'
 
   namespace :admin do
     resources :oders, only: [:update, :show]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    root to: 'homes#top'
   end
 
   namespace :public do
@@ -19,7 +19,6 @@ Rails.application.routes.draw do
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
     resources :items, only: [:index, :show]
-    root to: 'homes#top'
     get 'homes/about' => 'homes#about', as: '/about'
   end
 
