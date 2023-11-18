@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     resources :customers, only: [:edit, :update, :show]
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
-    resources :items, only: [:index, :show]
+    resources :items, only: [:index, :show] do
+      get :search_genre, on: :collection
+    end
     root to: 'homes#top'
     get 'homes/about' => 'homes#about', as: '/about'
   end

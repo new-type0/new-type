@@ -1,4 +1,5 @@
 <div class="countainer">
+  
   <div class="row">
     <div class="col-md-2">
       <table class="table table-hover table-bordered">
@@ -9,7 +10,7 @@
         </thead>
         <tbody>
           <%= genres.each do |genre| %>
-          <td><%= link_to genre.name, %></td>
+          <td><%= link_to genre.name, search_genre_public_items_path(genre.id), method: :get %></td>
         </tbody>
       </table>
       
