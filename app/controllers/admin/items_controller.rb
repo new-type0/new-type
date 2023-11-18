@@ -1,5 +1,4 @@
 class Admin::ItemsController < ApplicationController
-  before_action :authenticate_admin!
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
@@ -19,6 +18,9 @@ class Admin::ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def update
     if @item.update(item_params)
       redirect_to admin_item_path(@item)
@@ -36,12 +38,6 @@ class Admin::ItemsController < ApplicationController
     params.require(:item).permit(:name, :introduction, :tax_included_price, :image)
   end
 
-  def ensure_current_user  # 選択したitemのユーザー情報とログインしているユーザー情報が違う場合は編集できませんよーっ。
-    item = Item.find(params[:id])
-    if item.user_id != current_user.id
-      redirect_to action: :index
-    end
-  end
   def set_item
     @item = Item.find(params[:id])
   end
