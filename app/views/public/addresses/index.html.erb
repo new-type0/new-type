@@ -3,20 +3,21 @@
     <div class="mb-3 text-success font-weight-bolder">
       <h3>発送先登録画/一覧</h3>
     </div>
+     <%= form_for(@address, url: public_addresses_path) do |f| %>
       <div class="mt-3">
         <%= f.label :address_postal_code, "郵便番号（ハイフンなし）",class: "col-3" %>
-        <%= f.text_field :postal_code, class: "col-3" %>
+        <%= f.text_field :post_code, placeholder: "0000000",class: "col-3" %>
       </div>
       <div>
         <%= f.label :address, "住所",class: "col-3" %>
-        <%= f.text_field :address, class: "col-6" %>
+        <%= f.text_field :address, placeholder: "高知県",class: "col-6" %>
       </div>
       <div>
         <%= f.label :address_name, "宛名",class: "col-3" %>
-        <%= f.text_field :name, class: "col-3" %>
+        <%= f.text_field :name, placeholder: "鳴瀬タカシ",class: "col-3" %>
       </div>
       <div>
-        <%= f.submit "新規登録", class: "btn btn-success text-center" %>
+        <%= f.submit "新規登録", class: "btn btn-success" %>
       </div>
       <% end %>
       <table class="table table-bordered">
@@ -31,7 +32,7 @@
         <tbody>
           <%= @addresses.each do |address| %>
           <td>
-            <tr><%= address.address_postal_code %></tr>
+            <tr><%= address.address_post_code %></tr>
           </td>
           <td>
             <tr><%= address.address_postal_code %></tr>
@@ -46,6 +47,7 @@
           </td>
         </tbody>
       </table>
+    <% end %>
   </div>
 </div>
 
