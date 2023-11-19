@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about', as: '/about'
   end
 
-devise_for :customers, controllers: {
+devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
