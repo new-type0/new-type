@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
-    resources :orders, only: [:index, :create, :show, :new]
+    resources :arders, only: [:index, :create, :show, :new]
     post 'orders/confirm', to: 'orders#confirm'
     get 'orders/thanks', to: 'orders#thanks'
     resources :cart_items, only: [:index, :update, :create, :destroy]
@@ -18,15 +18,9 @@ Rails.application.routes.draw do
     resources :customers, only: [:edit, :update, :show]
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
-
-    resources :items, only: [:index, :show] 
-    end
-    
-    root to: 'homes#top'
-
+    resources :items, only: [:index, :show]
     get 'homes/about' => 'homes#about', as: '/about'
-    get 'genre/search' => 'searches#genre_search'
-
+  end
 
 devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
