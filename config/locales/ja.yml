@@ -16,3 +16,9 @@ ja:
         waiting: "製作待ち"
         production: "製作中"
         completed: "製作完了"
+    customer:
+      is_active:
+        active: "有効"
+        non_active: "退会"
+
+
