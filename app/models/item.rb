@@ -11,9 +11,9 @@ class Item < ApplicationRecord
   scope :price_low_to_high, -> { order(price: :asc) }
 
   belongs_to :genre
-  
+
   def remove_tax_price
     (self.tax_include_price/1.10).round
   end
-  
+
 end
