@@ -1,25 +1,25 @@
 <div class="countainer">
 
-  <div class="row  justify-content-center mt-5">
+  <div class="row  justify-content-center mt-5 ml-auto">
 
     <div class="col-md-2">
       <%= render 'layouts/search', genres: @genres %>
     </div>
 
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-8">
       <div class="row">
         <div class="col-md-4 m-auto">  <!--画像表示用-->
           <%= image_tag @item.image, class: "aspect-square w-full rounded-xl object-cover w-100"  %>
         </div>
-        <div class="col-md-6">  <!--商品情報表示用-->
+        <div class="col-md-6 m-auto">  <!--商品情報表示用-->
           <h3 class="text-5xl font-semibold tracking-tight text-gray-900 mb-4"><strong><%= @item.name %></strong></h3>
-          <h4 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= @item.introduction %></h4>
+          <h5 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= @item.introduction %></h5>
           <div class="form-check-inline">
             <h3>¥<%= (@item.tax_included_price).floor.to_s(:delimited) %></h3>
             <span><small>(税込)</small></span>
           </div>
           
-          <div class="mt-3">
+          <div class="my-5">
             <% if customer_signed_in? %>
               <%= form_with model: @cart_items, url: public_cart_items_path, local: true do |f| %>
                 <%= f.hidden_field :item_id, :value => @item.id %>
