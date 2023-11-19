@@ -19,6 +19,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
+    @genres = Genre.all
   end
 
   def update
@@ -30,15 +31,16 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
+
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :tax_included_price, :image)
+    params.require(:item).permit(:name, :introduction, :tax_included_price, :image, :is_saled, :genre_id)
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id]) unless params[:id] == "edit"# "params[:id]"が"edit"でない場合にのみアイテムを検索する。
   end
 end

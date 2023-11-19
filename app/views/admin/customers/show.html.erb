@@ -1,0 +1,47 @@
+<h5><%= @customer.family_name %><%= @customer.last_name %>さんの会員情報詳細</h5>
+
+<div>
+  <table>
+    <tr>
+      <td>会員ID</td>
+      <td><%= @customer.id%></td>
+    </tr>
+    <tr>
+      <td>氏名</td>
+      <td><%= @customer.family_name %><%= @customer.last_name %></td>
+    </tr>
+    <tr>
+      <td>カナ</td>
+      <td><%= @customer.family_name_kana %><%= @customer.last_name_kana %></td>
+    </tr>
+    <tr>
+      <td>郵便番号</td>
+      <td><%= @customer.postal_code %></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= @customer.address %></td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td><%= @customer.phone_number %></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= @customer.email %></td>
+    </tr>
+    <tr>
+      <td>会員ステータス</td>
+      <td><%= I18n.t("enums.customer.is_active.#{@customer.is_active}") %></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td><%= link_to "編集する", edit_admin_customer_path(@customer.id) %></td>
+      <td><%= link_to "注文履歴一覧を見る", public_addresses_path %></td>
+    </tr>
+  </table>
+
+</div>
+
