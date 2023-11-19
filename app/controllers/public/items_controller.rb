@@ -6,12 +6,15 @@ class Public::ItemsController < ApplicationController
     if params[:genre_id].present?
       #presentメソッドでparams[:genre_id]に値が含まれているか確認 => trueの場合下記を実行
       @genre = Genre.find(params[:genre_id])
-      @items = @genre.products
+      @items = @genre.items
     end
   end
 
   def show
+    @item = Item.find(params[:id])
+    @cart_items = CartItem.new
   end
+  
   def get_items(params)
     return Item.all, 'default' unless params[:latest] || params[:price_high_to_low] || params[:price_low_to_high]
 
@@ -21,4 +24,6 @@ class Public::ItemsController < ApplicationController
 
     return Item.price_low_to_high, 'price_low_to_high' if params[:price_low_to_high]
   end
+
+  
 end

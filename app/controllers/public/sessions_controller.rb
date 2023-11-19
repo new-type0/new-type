@@ -25,6 +25,11 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  def after_sign_in_path_for(public)
+    public_customer_path(current_customer)
+  end
+
+
   protected
 
   def configure_permitted_parameters

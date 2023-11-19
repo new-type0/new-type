@@ -61,8 +61,9 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   def after_sign_up_path_for(public)
-    public_customers_show_path(current_user)
+    public_customer_path(current_customer)
   end
+
 
   protected
   def configure_permitted_parameters
