@@ -6,7 +6,7 @@ class Public::ItemsController < ApplicationController
     if params[:genre_id].present?
       #presentメソッドでparams[:genre_id]に値が含まれているか確認 => trueの場合下記を実行
       @genre = Genre.find(params[:genre_id])
-      @items = @genre.products
+      @items = @genre.items
     end
   end
 
@@ -22,11 +22,6 @@ class Public::ItemsController < ApplicationController
 
     return Item.price_low_to_high, 'price_low_to_high' if params[:price_low_to_high]
   end
-  
-  def search_genre
-    @items = Item.where(genre_id:params[:format])
-    @amount = Genre.where(valid_invalid_status: 0)
-    render 'index'
-  end
+
   
 end

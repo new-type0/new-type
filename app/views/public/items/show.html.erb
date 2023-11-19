@@ -1,21 +1,13 @@
 <div class="countainer">
   
   <div class="row">
+    
     <div class="col-md-2">
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th>ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= genres.each do |genre| %>
-          <td><%= link_to genre.name, search_genre_public_items_path(genre.id), method: :get %></td>
-        </tbody>
-      </table>
-      
+      <%= render 'layout/search', {genres: @genres, genre: @genre} %>
     </div>
+    
     <div class="col-md-9 offset-md-1">
+      <%= image_tag @item.imag, class: "aspect-square w-full rounded-xl object-cover" %>
       
     </div>
   </div>

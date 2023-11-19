@@ -18,12 +18,13 @@ Rails.application.routes.draw do
     resources :customers, only: [:edit, :update, :show]
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
-    resources :items, only: [:index, :show] do
-      get :search_genre, on: :collection
+    resources :items, only: [:index, :show] 
     end
+    
     root to: 'homes#top'
     get 'homes/about' => 'homes#about', as: '/about'
-  end
+    get 'genre/search' => 'searches#genre_search'
+
 
 devise_for :customers, controllers: {
   registrations: "public/registrations",
