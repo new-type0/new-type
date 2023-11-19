@@ -9,6 +9,11 @@ class Item < ApplicationRecord
   has_one_attached :image
   scope :price_high_to_low, -> { order(price: :desc) }
   scope :price_low_to_high, -> { order(price: :asc) }
-  
+
   belongs_to :genre
+  
+  def remove_tax_price
+    (self.tax_include_price/1.10).round
+  end
+  
 end

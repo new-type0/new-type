@@ -1,20 +1,36 @@
 <div class="countainer">
 
+
   <div class="row">
 
     <div class="col-md-2">
-      <%= render 'layout/search', {genres: @genres, genre: @genre} %>
+      <%= render 'layouts/search', {genres: @genres, genre: @genre} %>
     </div>
 
     <div class="col-md-9 offset-md-1">
+
       <div class="row">
         <div class="col-md-6">  <!--画像表示用-->
           <%= image_tag @item.image, class: "aspect-square w-full rounded-xl object-cover" %>
         </div>
+        
         <div class="col-md-6">  <!--商品情報表示用-->
-          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= item.name %></p>
-          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= item.introduction %></p>
+
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= @item.name %></p>
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= @item.introduction %></p>
           <h3>¥<%= (@item.tax_included_price).floor.to_s(:delimited) %><span>（税込）</span></h3>
+        
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">商品名  <%= @item.name %></p>
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">商品説明  <%= @item.introduction %></p>
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">ジャンル  <%= @item.genre.name %></p>
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">税込価格(税抜価格)  <%= @item.tax_included_price %> (<%= @item.remove_tax_price.to_s(:dalimited) %>)円</p>
+          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">販売ステータス  
+            <% if @product.is_active == true %>
+              <%= "販売中" %>
+            <% else %>
+              <%=  "売り切れ" %>
+            <% end %><p>
+          <td><%= link_to "編集", edit_admin_item_path(@item), class: "btn btn-primar" %></td>
 
         </div>
       </div>
