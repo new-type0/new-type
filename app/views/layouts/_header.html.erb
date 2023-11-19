@@ -7,12 +7,12 @@
 
           <!--顧客ログイン時 -->
           <li>
-            ようこそ<%= current_customer.last_name + current_customer.first_name %>さん！
+            ようこそ<%= current_customer.last_name + current_customer.family_name %>さん！
           </li>
-          <li><%= link_to "マイページ", customers_show_path, class: 'nav-link text-dark' %></li>
-          <li><%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %></li>
-          <li><%= link_to "カート", customers_cart_items_path, class: 'nav-link text-dark' %></li>
-          <li><%= link_to "アバウト", about_path, class: 'nav-link text-dark' %></li>
+          <li><%= link_to "マイページ", public_customer_path(current_customer), class: 'nav-link text-dark' %></li>
+          <li><%= link_to "商品一覧", public_items_path, class: 'nav-link text-dark' %></li>
+          <li><%= link_to "カート", public_cart_items_path, class: 'nav-link text-dark' %></li>
+          <li><%= link_to "アバウト", public_about_path, class: 'nav-link text-dark' %></li>
           <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %></li>
 
         <% elsif admin_signed_in? %>
