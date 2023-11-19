@@ -30,6 +30,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
+
   end
 
   private
@@ -39,6 +40,6 @@ class Admin::ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id]) unless params[:id] == "edit"# "params[:id]"が"edit"でない場合にのみアイテムを検索する。
   end
 end
