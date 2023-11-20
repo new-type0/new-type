@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   has_many :orders, through: :order_details
   
   def remove_tax_price
-    (self.tax_include_price/1.10).round
+    (self.tax_included_price/1.10).round
   end
   
 end
