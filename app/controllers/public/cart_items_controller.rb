@@ -1,6 +1,6 @@
 class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_cart_item, only: %i[increase decrease destroy]
+  before_action :set_cart_item, only: %i[increase decrease destroy destroy_all]
 
   def index
     @cart_items = current_customer.cart_items
@@ -25,6 +25,11 @@ class Public::CartItemsController < ApplicationController
     @cart_item.destroy
     redirect_to request.referer
   end
+  
+  def destroy_all
+    @cart_items.destroy
+    
+  end
 
   def edit
   
@@ -32,6 +37,7 @@ class Public::CartItemsController < ApplicationController
   
   def set_cart_item
     @cart_item = current_customer.cart_items.find(params[:id])
+    @cart_items = current_customer.cart_items
   end
 
   def increase_or_create(product_id)
