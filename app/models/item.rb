@@ -18,5 +18,5 @@ class Item < ApplicationRecord
   def remove_tax_price
     (self.tax_included_price/1.10).round
   end
-  
+
 end
