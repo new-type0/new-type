@@ -16,7 +16,10 @@ ja:
         waiting: "製作待ち"
         production: "製作中"
         completed: "製作完了"
-
+    customer:
+      is_active:
+        active: "有効"
+        non_active: "退会"
 ja:
   errors:
     messages:
@@ -35,4 +38,5 @@ ja:
             image:
               blank: "商品画像は必須項目です。"
             genre: "ジャンルは必須項目です。"
+
 
