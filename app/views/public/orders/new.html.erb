@@ -3,9 +3,9 @@
     <div class="col-12 m-3">
       
 
-    <h3>支払情報入力</h3>
+    <h3 class="m-3">支払情報入力</h3>
     
-    <h5>支払方法</h5>
+    <h5 class="mt-3"><strong>支払方法</strong></h5>
     
     <%= form_with model: @order, url: public_orders_confirm_path do |f| %>
       
@@ -16,8 +16,20 @@
         <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
         <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
       </p>
+
+    <h5 class="mt-3"><strong>お届け先</strong></h5>
+    
+    <%= f.radio_button :address_option, 0, checked:"checked" %>
+    <%= f.label :order_address, "ご自身の住所" %>
+    <br>
+    〒<%= current_member.post_code %> #郵便番号
+    <%= current_member.address %><br>　＃住所
+    <%= current_member.last_name %><%= current_member.first_name %>　#名前
+    
+    <%= f.radio_button :address_option, 1 %>
       
-    <% end %>
+    <% end %>  
+      
     </div>      
   </div>
 </div>  
