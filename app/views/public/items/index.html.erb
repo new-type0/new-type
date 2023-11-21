@@ -1,36 +1,48 @@
-<div class="mb-8 text-center">
-  <span class="text-3xl font-bold">
-    商品一覧
-  </span>
+<div class="mb-2 text-center">
+  <%= image_tag 'ribon.png' %>
+  <h2>商品一覧</h2>
+  <%= image_tag 'ribon.png' %>
 </div>
 <div class="flex flex-wrap justify-center md:justify-start px-5">
-  <div class="mb-3 w-fit text-md font-medium mr-2 px-4 py-1.5 rounded <%= @sort === "latest" ? "bg-gray-800 text-gray-100" : "bg-gray-100 text-gray-800" %>">
-    <%= link_to 'Latest', public_items_path(latest: true) %>
+  <div class="mb-3 mr-2">
+    <%= link_to public_items_path(latest: true), class: "btn btn-md #{'btn-success' if @sort == 'latest'}" do %>
+      新着順
+    <% end %>
   </div>
-  <div class="mb-3 w-fit text-md font-medium mr-2 px-4 py-1.5 rounded <%= @sort === "price_high_to_low" ? "bg-gray-800 text-gray-100" : "bg-gray-100 text-gray-800" %>">
-    <%= link_to 'Price: High to Low', public_items_path(price_high_to_low: true) %>
+  <div class="mb-3 mr-2">
+    <%= link_to public_items_path(price_high_to_low: true), class: "btn btn-md #{'btn-danger' if @sort == 'price_high_to_low'}" do %>
+      価格が高い順
+    <% end %>
   </div>
-  <div class="mb-3 w-fit text-md font-medium mr-2 px-4 py-1.5 rounded <%= @sort === "price_low_to_high" ? "bg-gray-800 text-gray-100" : "bg-gray-100 text-gray-800" %>">
-    <%= link_to 'Price: Low to High', public_items_path(price_low_to_high: true) %>
+  <div class="mb-3 mr-2">
+    <%= link_to public_items_path(price_low_to_high: true), class: "btn btn-md #{'btn-primary' if @sort == 'price_low_to_high'}" do %>
+      価格が安い順
+    <% end %>
   </div>
 </div>
-<div class='flex flex-wrap justify-center'>
-  <% @items.each do |item| %>
-    <div class="w-full max-w-sm rounded-lg xl:w-4/12 md:w-6/12">
-      <%= link_to item_path(item) do %>
-        <%= image_tag item.image, class: "p-5 object-cover" %>
-        <div class="px-5 pb-5">
-          <p class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= item.name %></p>
-          <div class="flex justify-between items-center">
-            <span class="text-3xl font-bold text-gray-900"><%= number_to_currency(product.price, unit: "¥", strip_insignificant_zeros: true) %></span>
-            <% if product.stock > 0 %>
-              <span class="bg-blue-100 text-blue-800 text-xs font-semibold p-2 rounded">在庫有り</span>
-            <% else %>
-              <span class="bg-red-100 text-red-800 text-xs font-semibold p-2 rounded">在庫なし</span>
-            <% end %>
+<div class="row justify-content-start main">
+  <div class="col-2 mx-4">
+    <%= render 'layouts/search', genres: @genres %>
+  </div>
+  <div class="col-8">
+    <div class="row row-cols-4">
+      <% @items.each do |item| %>
+        <div class="col-3">
+          <%= link_to public_item_path(item.id) do %>
+            <%= image_tag item.image, style: "max-width: 100%; height: auto;" %>
+          <% end %>
+          <%= item.name %><br>
+          <div class="form-check-inline">
+            <h4>¥<%= item.tax_included_price.floor.to_s(:delimited) %></h4>
+            <span><small>(税込)</small></span>
           </div>
         </div>
       <% end %>
     </div>
-  <% end %>
+    <div class="row">
+      <div class="col justify-content-center">
+        <%= paginate @items %>
+      </div>
+    </div>
+  </div>
 </div>

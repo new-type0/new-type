@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <%= form_with model: @item, url: admin_items_path(@item.id), local: true, class: "xl:w-8/12 md:w-10/12", data: { turbo: false } do |f| %>
+      <%= form_with model: @item, url: admin_item_path(@item.id), local: true, class: "xl:w-8/12 md:w-10/12", data: { turbo: false } do |f| %>
         <%= render "admin/shared/error_messages", resource: @item %>
          <table class="table table-borderless">
           <tr>
@@ -39,7 +39,7 @@
           </tr>
           <tr>
             <td></td>
-            <td><%= f.submit "新規登録", class: "btn btn-success" %></td>
+            <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
           </tr>
         </table>
       <% end %>
