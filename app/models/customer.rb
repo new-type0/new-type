@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum is_active: {active: true, non_active: false}
-  
+
   has_many :cart_items, dependent: :destroy
-  
+
 end

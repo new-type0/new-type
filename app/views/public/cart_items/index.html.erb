@@ -13,16 +13,32 @@
     <% @cart_items.each do |cart_item|%>
     <tr>
         <td>
-            <%= image_tag cart_item.image %>
-            <%= cart.item.name%>
+            <%= image_tag cart_item.item.image %>
+            <%= cart_item.item.name%>
         </td>
-        <td><%= cart.item.tax_included_price %></td>
+        <td><%= cart_item.item.tax_included_price %></td>
         <td>
-            <%= cart.item.amount %>
-            
+            <%= cart_item.amount %>
+             <%= form_with(url: public_cart_item_path(cart_item), method: :patch,local: true) do |f| %>
+                 <%= f.hidden_field :item_id, value: cart_item.item.id %>
+                 <%= f.number_field :amount ,value: cart_item.amount %>
+                 <%= f.submit "変更", class: "" %>
+            <% end %>
         </td>
-
-        
+        <td>
+            <%= cart_item.item.tax_included_price * cart_item.amount %>
+        </td>
+        <td>
+            <%= button_to "削除", public_cart_item_path(cart_item.id), method: :delete, data: { confirm: "商品を削除しますか？" } %>
+        </td>
     </tr>
     <% end %>
+</table>
+
+<%= link_to "買い物を続ける", public_items_path %>
+<table>
+    <tr>
+        <td>合計金額</td>
+        <td><%= "#{@total}円" %></td>
+    </tr>
 </table>

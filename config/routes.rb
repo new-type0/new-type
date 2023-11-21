@@ -20,10 +20,6 @@ Rails.application.routes.draw do
     get 'orders/thanks', to: 'orders#thanks'
     resources :cart_items, only: [:index, :update, :create, :destroy] do
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
-      member do
-        patch 'increase'
-        patch 'decrease'
-      end
     end
     resources :customers, only: [:edit, :update, :show]
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'

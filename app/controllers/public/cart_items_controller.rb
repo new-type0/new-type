@@ -1,60 +1,65 @@
 class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_cart_item, only: %i[increase decrease destroy destroy_all]
+  before_action :set_cart_item, only: %i[ update destroy destroy_all]
 
   def index
     @cart_items = current_customer.cart_items
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
+#12行目一部削除した
   def create
-    increase_or_create(params[:cart_item][:item_id])
-    redirect_to public_cart_items
+      increase_or_create(params[:item_id])
+      redirect_to public_item_path(params[:item_id])
+
   end
 
-  def increase
-    @cart_item.increment!(:quantity, 1)
-    redirect_to request.referer
+  def update
+    if @cart_item.update(amount: params[:amount].to_i)
+      flash[:notice] = '更新されました'
+    else
+      flash[:alert] = '更新に失敗しました'
+    end
+    redirect_to  public_cart_items_path(current_customer)
+
   end
 
-  def decrease
-    decrease_or_destroy(@cart_item)
-    redirect_to request.referer
-  end
-  
   def destroy
-    @cart_item.destroy
-    redirect_to request.referer
+    if @cart_item.destroy
+      flash[:notice] = '削除されました'
+    else
+      flash[:alert] = '削除に失敗しました'
+    end
+    redirect_to  public_cart_items_path(current_customer)
   end
-  
+
   def destroy_all
     @cart_items.destroy
-    
+    redirect_to public_cart_items_path(current_customer)
+
   end
 
   def edit
-  
+
   end
-  
+
   def set_cart_item
     @cart_item = current_customer.cart_items.find(params[:id])
     @cart_items = current_customer.cart_items
   end
 
-  def increase_or_create(product_id)
-    cart_item = current_customer.cart_items.find_by(product_id:)
+  def increase_or_create(item_id)
+    cart_item = current_customer.cart_items.find_by(item_id:)
     if cart_item
-      cart_item.increment!(:quantity, 1)
+      cart_item.increment!(:amount, 1)
     else
-      current_customer.cart_items.build(product_id:).save
+      current_customer.cart_items.build(item_id:).save
     end
   end
 
-  def decrease_or_destroy(cart_item)
-    if cart_item.quantity > 1
-      cart_item.decrement!(:quantity, 1)
-    else
-      cart_item.destroy
-    end
+  private
+  def item_params
+    params.require(:item).permit(:image, :name, :tax_included_price)
   end
-  
+
 end
