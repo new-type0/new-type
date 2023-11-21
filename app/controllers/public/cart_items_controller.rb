@@ -9,9 +9,8 @@ class Public::CartItemsController < ApplicationController
 
 #12行目一部削除した
   def create
-      increase_or_create(params[:item_id])
-      redirect_to public_item_path(params[:item_id])
-
+      increase_or_create(cart_item_params[:item_id])
+      redirect_to public_cart_items_path(current_customer)
   end
 
   def update
@@ -60,6 +59,10 @@ class Public::CartItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:image, :name, :tax_included_price)
+  end
+
+  def cart_item_params
+      params.require(:cart_item).permit(:item_id, :amount)
   end
 
 end

@@ -18,7 +18,7 @@
             <h3>¥<%= (@item.tax_included_price).floor.to_s(:delimited) %></h3>
             <span><small>(税込)</small></span>
           </div>
-          
+
           <div class="my-5">
             <% if customer_signed_in? %>
               <%= form_with model: @cart_item, url: public_cart_items_path, local: true do |f| %>

@@ -20,7 +20,7 @@ class Public::ItemsController < ApplicationController
       @items = @genre.items
     end
   end
-  
+
   def get_items(params)
     return Item.all, 'default' unless params[:latest] || params[:price_high_to_low] || params[:price_low_to_high]
 
@@ -31,5 +31,5 @@ class Public::ItemsController < ApplicationController
     return Item.price_low_to_high, 'price_low_to_high' if params[:price_low_to_high]
   end
 
-  
+
 end

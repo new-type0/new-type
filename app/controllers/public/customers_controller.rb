@@ -2,7 +2,6 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
   def show
     @customer = Customer.find(params[:id])
-    @cart_item = CartItem.new
   end
 
   def edit
@@ -19,5 +18,7 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:family_name, :last_name, :family_name_kana, :last_name_kana, :email, :postal_code, :address, :phone_number)
   end
+
+  
 
 end
