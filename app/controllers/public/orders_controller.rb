@@ -32,6 +32,29 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all
     
   end
+  
+  def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.save
+    
+    current_customer.cart_items.each do |cart_item|
+      @ordered_item = OrderDetail.new
+      @ordered_item.order_id = @order.id
+      @ordered_item.item_id = cart_item.item_id
+      @ordered_item.quantity = cart_item.quantity
+      @ordered_item.tax_included_price = cart_item.item.tax_included_price
+      @ordered_item.save
+    end
+    
+    current_customer.cat_items.destroy_all?
+    redirect_to public_orders_thanks_path
+
+  end
+  
+  
+  def thanks
+  end
 
   def index
   end
