@@ -21,7 +21,7 @@
 
           <div class="my-5">
             <% if customer_signed_in? %>
-              <%= form_with model: @cart_items, url: public_cart_items_path, local: true do |f| %>
+              <%= form_with model: @cart_item, url: public_cart_items_path, local: true do |f| %>
                 <%= f.hidden_field :item_id, :value => @item.id %>
                 <%= f.select :amount , *[1..50] , {include_blank: '個数選択'} %>
                 <!--<%= f.number_field :amount , placeholder: "個数選択", min: 1, max: 50, size: "100" %>-->
