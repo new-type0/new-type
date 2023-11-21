@@ -1,2 +1,84 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div class="container">
+  
+  <div class="row">
+    
+    <h4>注文履歴詳細</h4>
+    <table class="table table-borderless">
+      <tr>
+        <th>購入者</th>
+        <td><%= link_to @order.customer.last_name + @order.customer.family_name, admin_customer_path(@customer) %></td>
+      </tr>
+      <tr>
+        <th>注文日</th>
+        <td><%= @order.created_at %></td>
+      </tr>
+      <tr>
+        <th>配送先</th>
+        <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
+      </tr>
+      <tr>
+        <th>支払方法</th>
+        <td><%= @order.payment_method %></td>
+      </tr>
+      <tr>
+        <th>注文ステータス</th>
+        <td>
+          <%= form_with model:order, url: admin_order_path(order), method: :patch do |f| %>
+            <%= f.select :order_status, options_for_select(Order.order_statuses.map {|key, value| [I18n.t("order_statuses.#{value}"), key]}),{},{class: "form-control"} %>
+            <%= f.submit '更新', class:"btn btn-success" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-7 offset-md-1">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>  
+            <td><%= order_detail.tax_included_price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= ((order_detail.tax_included_price)*(order_detail.amount)) %></td>
+            <td>
+              <%= form_with model:order_detail, url: admin_order_details_path(order_detail) do |f| %>
+                <%= f.select :production_status, option_for_select(OrderDetail.production_statuses.map {|key, value| [I18n.t("production_statuses.#{value}"), key]}),{},{class:"form-control"} %>
+                <%= f.submit '更新', class:"btn btn-success" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3">
+      <table class="table table-borderless">
+        <tr>
+          <th>商品合計</th>
+          <td class="text-end"><%= @order.billing_amount %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td class="text-end"><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <th class="text-end"><%= (@order.billing_amount+@order.postage) %>円</th>
+        </tr>
+      </table>
+      
+    </div>
+  </div>
+  
+</div>
