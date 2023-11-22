@@ -13,12 +13,11 @@
     <% @cart_items.each do |cart_item|%>
     <tr>
         <td>
-            <%= image_tag cart_item.item.image %>
+            <%= image_tag cart_item.item.image, style: "width: 100px; height: 100px;" %>
             <%= cart_item.item.name%>
         </td>
         <td><%= cart_item.item.tax_included_price %></td>
         <td>
-            <%= cart_item.amount %>
              <%= form_with(url: public_cart_item_path(cart_item), method: :patch,local: true) do |f| %>
                  <%= f.hidden_field :item_id, value: cart_item.item.id %>
                  <%= f.number_field :amount ,value: cart_item.amount %>
