@@ -1,19 +1,28 @@
 class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_cart_item, only: %i[ update destroy destroy_all]
+  before_action :set_cart_item, only: %i[ create update destroy destroy_all]
 
   def index
-    @cart_items = current_customer.cart_items
+    @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
 #12行目一部削除した
   def create
-      increase_or_create(cart_item_params[:item_id])
-      redirect_to public_cart_items_path(current_customer)
+      if @cart_item
+        @cart_item.amount += params[:amount].to_i
+        @cart_item.save
+        redirect_to public_cart_items_path(current_customer)
+      else
+        cart_item = CartItem.new(cart_item_params)
+        cart_item.customer_id = current_customer.id
+        cart_item.save
+        redirect_to public_cart_items_path(current_customer)
+      end
   end
 
   def update
+
     if @cart_item.update(amount: params[:amount].to_i)
       flash[:notice] = '更新されました'
     else
@@ -24,7 +33,8 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy
-    if @cart_item.destroy
+    @delete_cart_item = CartItem.find(params[:id])
+    if @delete_cart_item.destroy
       flash[:notice] = '削除されました'
     else
       flash[:alert] = '削除に失敗しました'
@@ -33,7 +43,8 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
-    @cart_items.destroy
+    @cart_items = current_customer.cart_items.all
+    @cart_items.destroy_all
     redirect_to public_cart_items_path(current_customer)
 
   end
@@ -43,26 +54,22 @@ class Public::CartItemsController < ApplicationController
   end
 
   def set_cart_item
-    @cart_item = current_customer.cart_items.find(params[:id])
-    @cart_items = current_customer.cart_items
+    @cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
   end
 
-  def increase_or_create(item_id)
-    cart_item = current_customer.cart_items.find_by(item_id:)
-    if cart_item
-      cart_item.increment!(:amount, 1)
-    else
-      current_customer.cart_items.build(item_id:).save
-    end
-  end
+  # def increase_or_create(item_id)
+  #   cart_item = current_customer.cart_items.find_by(item_id:)
+  #   if cart_item
+  #     cart_item.increment!(:amount, 1)
+  #   else
+  #     current_customer.cart_items.build(item_id:).save
+  #   end
+  # end
 
   private
-  def item_params
-    params.require(:item).permit(:image, :name, :tax_included_price)
+  def cart_item_params
+    params.require(:cart_item).permit(:item_id, :amount)
   end
 
-  def cart_item_params
-      params.require(:cart_item).permit(:item_id, :amount)
-  end
 
 end
