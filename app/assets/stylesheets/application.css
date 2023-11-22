@@ -25,14 +25,15 @@
   width: 100%;
 }
 
-/*.mark {*/
-/*  width: 50px;*/
-/*}*/
-
 .mark img {
   width: 50px;
 }
 
 .mv_text {
   font-size: 45px;
+}
+
+.title_border {
+  border-top: 2px solid #492e06;
+  border-bottom: 2px solid #492e06;
 }
