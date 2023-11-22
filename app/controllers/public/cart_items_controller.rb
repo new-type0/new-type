@@ -4,13 +4,19 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    # @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @cart_items = CartItem.all
   end
 
 #12行目一部削除した
-  def create
-      increase_or_create(params[:item_id])
-      redirect_to public_item_path(params[:item_id])
+      # increase_or_create(params[:item_id])
+      # redirect_to public_item_path(params[:item_id])
+  def create      
+    @cart_item = CartItem.new(cart_item_params)
+    @cart_item.save
+    redirect_to public_cart_items_path
+  # デバッグ
+    # binding.pry
 
   end
 
@@ -62,4 +68,7 @@ class Public::CartItemsController < ApplicationController
     params.require(:item).permit(:image, :name, :tax_included_price)
   end
 
+  def cart_item_params
+    params.require(:cart_item).permit(:item_id, :amount)
+  end
 end

@@ -20,6 +20,7 @@ class Admin::ItemsController < ApplicationController
 
   def show
     @genres = Genre.all
+    @cart_item = CartItem.new(cart_item_params)
   end
 
   def update
