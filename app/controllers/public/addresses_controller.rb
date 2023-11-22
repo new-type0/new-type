@@ -9,9 +9,9 @@ class Public::AddressesController < ApplicationController
     @address = current_customer.addresses.new(address_params)
 
     if @address.save
-      redirect_to public_addresses_path(@address), notice: 'Address created successfully'
+      redirect_to public_addresses_path(@address), notice: '登録完了しました。'
     else
-      puts "Address creation failed. Errors: #{address.errors.full_messages}"
+      puts "Address creation failed. Errors: #{@address.errors.full_messages}"
       @addresses = Address.all
       render 'index'
     end
@@ -26,7 +26,7 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
-      redirect_to public_addresses_path(@address), notice: '更新に成功しました'
+      redirect_to public_addresses_path(@address), notice: '更新に成功しました。'
     else
       render 'edit'
     end
@@ -35,7 +35,7 @@ class Public::AddressesController < ApplicationController
   def destroy
     @address = Address.find(params[:id])
     @address.destroy
-    redirect_to public_addresses_path, notice: '削除完了しました'
+    redirect_to public_addresses_path, notice: '削除完了しました。'
   end
 
 
