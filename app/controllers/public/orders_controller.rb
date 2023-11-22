@@ -4,6 +4,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = Address.all
   end
 
   def confirm
@@ -29,25 +30,29 @@ class Public::OrdersController < ApplicationController
       render 'new'
     end
     
-    @cart_items = current_customer.cart_items.all
+    # @cart_items = current_customer.cart_items
+    @cart_items = CartItem.where(customer_id: current_customer.id)
+    @order_new = Order.new
+    render 'confirm'
     
   end
   
   def create
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
     @order.save
+    @cart_items = current_customer.cart_items.all
     
-    current_customer.cart_items.each do |cart_item|
-      @ordered_item = OrderDetail.new
-      @ordered_item.order_id = @order.id
-      @ordered_item.item_id = cart_item.item_id
-      @ordered_item.quantity = cart_item.quantity
-      @ordered_item.tax_included_price = cart_item.item.tax_included_price
-      @ordered_item.save
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item_id
+      @order_detail.order_id = @order_id
+      @order_detail.amount = cart_item.amount
+      @order_detail.tax_included_price = cart_item.item.tax_included_price
+      @order_detail.production_status = 1
+      @order_detail.save
     end
     
-    current_customer.cat_items.destroy_all?
+    @cart_items.destroy_all
     redirect_to public_orders_thanks_path
 
   end

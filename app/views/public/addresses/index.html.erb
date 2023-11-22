@@ -22,7 +22,7 @@
       <div class="form-group row mt-3">
         <%= f.label :address_postal_code, "郵便番号（ハイフンなし）", class: "col-3 col-form-label" %>
         <div class="col-3">
-          <%= f.text_field :post_code, placeholder: "0000000", class: "form-control", required: true %>
+          <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control", required: true %>
         </div>
       </div>
 
@@ -64,7 +64,7 @@
         <% else %>
           <% @addresses.each do |address| %>
             <tr>
-              <td style="border: 1px solid black;"><%= address.post_code %></td>
+              <td style="border: 1px solid black;"><%= address.postal_code %></td>
               <td style="border: 1px solid black;"><%= address.address %></td>
               <td style="border: 1px solid black;"><%= address.name %></td>
               <td style="border: 1px solid black;">
