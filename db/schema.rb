@@ -8,9 +8,10 @@
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
-# It's strongly recommended that you check this file into your version control system.
+# It's strongly recommended that you check this file into your version control s
 
 ActiveRecord::Schema.define(version: 2023_11_15_114242) do
+
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
