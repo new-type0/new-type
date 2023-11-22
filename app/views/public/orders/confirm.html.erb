@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 m-3">
-      <h3 class="m-3">注文情報確認</h3> 
+      <h3 class="m-3">注文情報確認</h3>
       <tr>
         <table class="table table-bordered">
           <thead>
@@ -17,7 +17,7 @@
             <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <%= image_tag(cart_item.item, :image, size: "50x50", fallback: "no_image.jpg")%>
+                <%= image_tag(cart_item.item.image, size: "50x50", fallback: "no_image.jpg") %>
                 <%= cart_item.item.name %>
               </td>
               <td><%= cart_item.item.tax_included_price %></td>
@@ -31,7 +31,7 @@
             <% end %>
           </tbody>
         </table>
-        
+
         <table>
           <tr>
             <th>送料</th>
@@ -49,7 +49,7 @@
           </tr>
         </table>
       </tr>
-      
+
       <table>
         <tr>
           <th class=col-md-3>支払方法</th>
@@ -64,7 +64,7 @@
           </td>
         </tr>
       </table>
-      
+
     <%= form_with model: @order, url: orders_path, method: :post do |f| %>
       <%= f.hidden_field :customer_id %>
       <%= f.hidden_field :postage %>
@@ -75,7 +75,7 @@
       <%= f.hidden_field :order_status %>
       <%= f.submit "注文を確定する", class: "btn btn-success" %>
     <% end %>
-    
+
     </div>
   </div>
 </div>

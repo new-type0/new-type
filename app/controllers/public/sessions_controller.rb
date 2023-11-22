@@ -26,6 +26,7 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+
   def after_sign_in_path_for(public)
     public_customer_path(current_customer)
   end
@@ -38,7 +39,7 @@ class Public::SessionsController < Devise::SessionsController
 
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
-    if @cutomer
+    if @customer
       if @customer.valid_password?(params[:customer][:password]) && !@customer.is_active
         # パスワードが正しく、かつ無効である場合、新しいユーザーセッションのパスにリダイレクトします。
         redirect_to new_customer_session_path

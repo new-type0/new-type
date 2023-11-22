@@ -1,22 +1,22 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
 
   def index
+    @addresses = current_customer.addresses
     @addresses = Address.all
     @address = Address.new
   end
 
   def create
     @address = current_customer.addresses.new(address_params)
-
     if @address.save
-      redirect_to public_addresses_path(@address), notice: '登録完了しました。'
+      redirect_to public_addresses_path, notice: '登録完了しました。'
     else
-      puts "Address creation failed. Errors: #{@address.errors.full_messages}"
-      @addresses = Address.all
+      flash.now[:alert] = '登録に失敗しました。'
+      @addresses = current_customer.addresses
       render 'index'
     end
   end
-
 
 
   def edit
@@ -26,7 +26,7 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
-      redirect_to public_addresses_path(@address), notice: '更新に成功しました。'
+      redirect_to public_addresses_path, notice: '更新に成功しました。'
     else
       render 'edit'
     end
@@ -42,6 +42,6 @@ class Public::AddressesController < ApplicationController
   private
 
   def address_params
-    params.require(:address).permit(:name, :address, :post_code)
+    params.require(:address).permit(:name, :address, :postal_code, :customer_id)
   end
 end
