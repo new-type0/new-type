@@ -15,12 +15,11 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+    get 'orders/thanks', to: 'orders#thanks'
     resources :orders, only: [:index, :create, :show, :new]
     post 'orders/confirm', to: 'orders#confirm'
-    get 'orders/thanks', to: 'orders#thanks'
-    resources :cart_items, only: [:index, :update, :create, :destroy] do
-    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
-    end
+    resources :cart_items, only: [:index, :update, :create, :destroy]
+    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all' #deketeメソッドちゃんと機能してる？
     resources :customers, only: [:edit, :update, :show]
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
