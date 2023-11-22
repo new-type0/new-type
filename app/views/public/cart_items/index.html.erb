@@ -1,6 +1,6 @@
 <h1>ショッピングカート</h1>
 
-<%= link_to "カートを空にする", public_cart_item_cart_items_destroy_all_path(current_customer), method: :delete %>
+<%= link_to "カートを空にする", public_cart_items_destroy_all_path(current_customer), method: :delete %>
 
 <table border=4>
     <tr>
@@ -26,7 +26,11 @@
             <% end %>
         </td>
         <td>
-            <%= cart_item.item.tax_included_price * cart_item.amount %>
+             <% if cart_item.item.tax_included_price.present? && cart_item.amount.present? %>
+                <%= cart_item.item.tax_included_price * cart_item.amount %>
+             <% else %>
+               0
+              <% end %>
         </td>
         <td>
             <%= button_to "削除", public_cart_item_path(cart_item.id), method: :delete, data: { confirm: "商品を削除しますか？" } %>
@@ -36,6 +40,7 @@
 </table>
 
 <%= link_to "買い物を続ける", public_items_path %>
+<%= link_to "入力画面に進む", new_public_order_path %>
 <table>
     <tr>
         <td>合計金額</td>
