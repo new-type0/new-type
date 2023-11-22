@@ -1,7 +1,11 @@
-<h5>マイページ</h5>
+<h2>マイページ</h2>
 
-<h5>登録情報</h5>
-<%= link_to "編集する", edit_public_customer_path(current_customer) %>
+<div class="d-flex justify-content-between">
+  <h5 class="p-2">登録情報</h5>
+  <>
+  <%= link_to "編集する", edit_public_customer_path(current_customer), class:"btn btn-success" %>
+</div>
+
 <div>
   <table border="1">
     <tr>
