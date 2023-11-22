@@ -19,4 +19,6 @@ class Public::CustomersController < ApplicationController
     params.require(:customer).permit(:family_name, :last_name, :family_name_kana, :last_name_kana, :email, :postal_code, :address, :phone_number)
   end
 
+  
+
 end
