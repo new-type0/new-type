@@ -33,21 +33,17 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy
-    @delete_cart_item = CartItem.find(params[:id])
-    if @delete_cart_item.destroy
-      flash[:notice] = '削除されました'
-    else
-      flash[:alert] = '削除に失敗しました'
-    end
+    delete_cart_item = CartItem.find(params[:id])
+    delete_cart_item.destroy
     redirect_to  public_cart_items_path(current_customer)
   end
 
   def destroy_all
-    @cart_items = current_customer.cart_items.all
-    @cart_items.destroy_all
-    redirect_to public_cart_items_path(current_customer)
-
+    cart_items = current_customer.cart_items.all
+    cart_items.destroy_all
+  　redirect_to public_cart_items_path(current_customer)
   end
+
 
   def edit
 
