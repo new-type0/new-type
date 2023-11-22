@@ -1,23 +1,24 @@
-<h5>新規会員登録</h5>
+<h5 class="m-4">新規会員登録</h5>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 <div>
-  <table>
+  <table class="m-3">
     <tr>
       <td>名前</td>
       <td><%= f.label :"(姓)" %></td>
-      <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
-      <td><%= f.label :"(名)" %></td>
-      <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
+      <td>
+          <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %>
+          <%= f.label :"　　(名)　" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+      </td>
     </tr>
     <tr>
       <td>フリガナ</td>
       <td><%= f.label :"(セイ)" %></td>
-      <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
-      <td><%= f.label :"(メイ)" %></td>
-      <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %></td>
-    </tr>
+      <td>
+        <%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %>
+        <%= f.label :"　　(メイ)" %><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+      </td>
     <tr>
       <td>メールアドレス</td>
       <td></td>
@@ -31,7 +32,7 @@
     <tr>
       <td>住所</td>
       <td></td>
-      <td><%= f.text_field :address, :size=>"40", autofocus: true, autocomplete: "address" %></td>
+      <td><%= f.text_field :address, :size=>"51", autofocus: true, autocomplete: "address" %></td>
     </tr>
     <tr>
       <td>電話番号(ハイフンなし)</td>
@@ -55,14 +56,14 @@
     <tr>
       <td></td>
       <td></td>
-      <td><%= f.submit "新規登録" %></td>
+      <td><%= f.submit "　　新規登録　　", class:"btn btn-success m-1"  %></td>
     </tr>
   </table>
 </div>
 <% end %>
 
-<h5>既に登録済みの方</h5>
-<p>
+<h5 class="m-3">既に登録済みの方</h5>
+<p class="m-3">
   <%= link_to "こちら", new_customer_session_path %>
   からログインしてください。
 </p>
