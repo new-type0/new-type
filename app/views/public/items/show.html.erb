@@ -1,19 +1,19 @@
 <div class="countainer">
 
-  <div class="row  justify-content-center mt-5 ml-auto">
+  <div class="row  justify-content-center p-5 ml-auto">
 
     <div class="col-md-2">
       <%= render 'layouts/search', genres: @genres %>
     </div>
-
-    <div class="col-md-8">
+    
+    <div class="col-md-8 card-borderless">
       <div class="row">
-        <div class="col-md-4 m-auto">  <!--画像表示用-->
+        <div class="col-md-4 d-block m-auto p-3">  <!--画像表示用-->
           <%= image_tag @item.image, class: "aspect-square w-full rounded-xl object-cover w-100"  %>
         </div>
-        <div class="col-md-6 m-auto">  <!--商品情報表示用-->
-          <h3 class="text-5xl font-semibold tracking-tight text-gray-900 mb-4"><strong><%= @item.name %></strong></h3>
-          <h5 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"><%= @item.introduction %></h5>
+        <div class="col-md-6 offset-col-1 m-auto p-3">  <!--商品情報表示用-->
+          <h3 class="mb-4"><strong><%= @item.name %></strong></h3>
+          <h5 class="lead mb-4"><%= @item.introduction %></h5>
           <div class="form-check-inline">
             <h3>¥<%= (@item.tax_included_price).floor.to_s(:delimited) %></h3>
             <span><small>(税込)</small></span>
@@ -21,9 +21,9 @@
 
           <div class="my-5">
             <% if customer_signed_in? %>
-              <%= form_with model: @cart_item, url: public_cart_items_path, local: true do |f| %>
+              <%= form_with model: @cart_item, url: public_cart_items_path do |f| %>
                 <%= f.hidden_field :item_id, :value => @item.id %>
-                <%= f.select :amount , *[1..50] , {include_blank: '個数選択'} %>
+                <%= f.select :amount , options_for_select(1..50) , {include_blank: '個数選択'} %>
                 <!--<%= f.number_field :amount , placeholder: "個数選択", min: 1, max: 50, size: "100" %>-->
               	<%= f.submit 'カートに入れる', class: "btn-sm btn-success" %>
               <% end %>
@@ -33,5 +33,7 @@
         </div>
       </div>
     </div>
+
+
   </div>
 </div>
