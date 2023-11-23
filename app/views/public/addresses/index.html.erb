@@ -62,6 +62,13 @@
             </td>
           </tr>
         <% else %>
+        
+        <td style="border: 1px solid black;"><%= current_customer.postal_code %></td>
+        <td style="border: 1px solid black;"><%= current_customer.address %></td>
+        <td style="border: 1px solid black;"><%= current_customer.family_name %><%= current_customer.last_name %></td>
+        <td style="border: 1px solid black;"><%= link_to "編集する", edit_public_customer_path(current_customer.id), class: "btn btn-success text-center" %></td>
+        
+        
           <% @addresses.each do |address| %>
             <tr>
               <td style="border: 1px solid black;"><%= address.postal_code %></td>
