@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row'>
-    <div class="col-md-5 px-0 mx-auto">
+    <div class="col-md-6 px-0 mx-auto">
       <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
         <h3 class="mb-0">マイページ</h3>
       </div>
@@ -10,34 +10,34 @@
 
 <div class='container'>
   <div class='row'>
-    <div class="col-md-5 bg-white p-5 mx-auto rounded-lg">
+    <div class="col-md-6 bg-white p-5 mx-auto rounded-lg">
 
       <h4>登録情報 <%= link_to "編集する", edit_public_customer_path(current_customer), class:"btn btn-success" %></h4>
 
       <table border="1", style="font-size : 18px;">
         <tr>
-          <td style="width: 40%;">氏名</td>
-          <td style="width: 60%;"><%= @customer.family_name %><%= @customer.last_name %></td>
+          <td style="width: 150px;">氏名</td>
+          <td style="width: 320px;"><%= @customer.family_name %><%= @customer.last_name %></td>
         </tr>
         <tr>
-          <td style="width: 40%;">カナ</td>
-          <td style="width: 60%;"><%= @customer.family_name_kana %><%= @customer.last_name_kana %></td>
+          <td style="width: 150px;">カナ</td>
+          <td style="width: 320px;"><%= @customer.family_name_kana %><%= @customer.last_name_kana %></td>
         </tr>
         <tr>
-          <td style="width: 40%;">郵便番号</td>
-          <td style="width: 60%;"><%= @customer.postal_code %></td>
+          <td style="width: 150px;">郵便番号</td>
+          <td style="width: 320px;"><%= @customer.postal_code %></td>
         </tr>
         <tr>
-          <td style="width: 40%;">住所</td>
-          <td style="width: 70%;"><%= @customer.address %></td>
+          <td style="width: 150px;">住所</td>
+          <td style="width: 320px;"><%= @customer.address %></td>
         </tr>
         <tr>
-          <td style="width: 40%;">電話番号</td>
-          <td style="width: 60%;"><%= @customer.phone_number %></td>
+          <td style="width: 150px;">電話番号</td>
+          <td style="width: 320px;"><%= @customer.phone_number %></td>
         </tr>
         <tr>
-          <td style="width: 40%;">メールアドレス</td>
-          <td style="width: 60%;"><%= @customer.email %></td>
+          <td style="width: 150px;">メールアドレス</td>
+          <td style="width: 320px;"><%= @customer.email %></td>
         </tr>
       </table>
 
