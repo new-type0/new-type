@@ -30,9 +30,9 @@
             <% @items.last(4).each do |item| %>
             <div class='col-md-3'>
               <%= link_to public_item_path(item.id) do %>
-                <%= image_tag item.image, class: "w-100" %>
+                <%= image_tag item.image, size: "165x165", class: "w-100 rounded-lg" %>
               <% end %>
-              <p><%= item.name %></p>
+              <p class="my-2"><%= item.name %></p>
               <span><%= number_to_currency(item.tax_included_price, unit: "¥", strip_insignificant_zeros: true) %></span>
             </div>
             <% end %>
