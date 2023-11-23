@@ -1,26 +1,36 @@
-<div class="d-inline-block flex">
-  <%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(latest: true), button_class: 'btn-success', link_text: '新着順' } %>
-  <%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_high_to_low: true), button_class: 'btn-danger', link_text: '価格が高い順' } %>
-  <%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_low_to_high: true), button_class: 'btn-primary', link_text: '価格が安い順' } %>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-12 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">商品一覧</h3>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class='container px-5 px-sm-0'>
+<div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
+    <div class='col-md-3 px-0'>
       <%= render 'layouts/search', genres: @genres %>
     </div>
 
-      <div class='col-md-8 offset-md-1'>
-        <div class='title_border text-center pt-1 pb-1 mb-4'>
-          <h3 class='mb-0'>商品一覧</h3>
-        </div>
+      <div class='col-md-8 offset-md-1 px-0'>
+
+        <table class="mx-auto mb-2">
+          <tr>
+            <td><%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(latest: true), button_class: 'btn-success', link_text: '　 新 着 順 　' } %></td>
+            <td><%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_high_to_low: true), button_class: 'btn-danger', link_text: '価格が高い順' } %></td>
+            <td><%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_low_to_high: true), button_class: 'btn-primary', link_text: '価格が安い順' } %></td>
+          </tr>
+        </table>
+
         <div class='row'>
           <% @items.each do |item| %>
-          <div class='col-md-3'>
+          <div class='col-md-3 mb-4'>
             <%= link_to public_item_path(item.id) do %>
               <%= image_tag item.image, size: "165x165", class: "w-100 rounded-lg" %>
             <% end %>
-            <p class="my-2"><%= item.name %></p>
+            <p class="mt-2 mb-0"><%= item.name %></p>
             <span><%= number_to_currency(item.tax_included_price, unit: "¥", strip_insignificant_zeros: true) %></span>
           </div>
           <% end %>
