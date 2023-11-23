@@ -1,21 +1,24 @@
-<table class = "table table-hover table-inverse border="1" frame="box" m-3">
-  <thead>
-    <tr>
-      <th>ジャンル検索</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% genres.each do |genre| %>
-    <tr>
-      <% if genre.respond_to?(:is_active) && genre.is_active == true %>
-      <td>         <!--`genre`オブジェクトが`is_active`というメソッドを持っている場合にのみ実行される条件文です。-->
-        <%= link_to genre.name, public_items_path(genre_id: genre.id), class: "text-primary" %>
-      </td>                    <%# items_pathに引数としてgenre_idを渡す %>
-      <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-
+<div class='container'>
+  <div class='row'>
+    <div class="col-md bg-white p-3 mx-auto rounded-lg">
+      <table class = "table">
+        <thead>
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% genres.each do |genre| %>
+          <tr>
+            <% if genre.respond_to?(:is_active) && genre.is_active == true %>
+            <td>         <!--`genre`オブジェクトが`is_active`というメソッドを持っている場合にのみ実行される条件文です。-->
+              <%= link_to genre.name, public_items_path(genre_id: genre.id), class: "text-primary" %>
+            </td>                    <%# items_pathに引数としてgenre_idを渡す %>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
