@@ -9,23 +9,23 @@
          <table class="table table-borderless">
           <tr>
             <th scope="col" class="mt-2 mb-2"><%= f.label :image, "商品画像" %></th>
-            <td><%= f.file_field :image %></td>
+            <td><%= f.file_field :image, required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :name, "商品名" %></th>
-            <td><%= f.text_field :name, placeholder: "商品名", class: "form-control" %></td>
+            <td><%= f.text_field :name, placeholder: "商品名", class: "form-control", required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :introduction, "商品説明" %></th>
-            <td><%= f.text_area :introduction, rows: "5", placeholder: "ここに説明文を記述します", class: "form-control" %></td>
+            <td><%= f.text_area :introduction, rows: "5", placeholder: "ここに説明文を記述します", class: "form-control", required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :genre_id, "ジャンル" %></th>
-            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select" %></td>
+            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select", required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :tax_included_price, "税抜価格" %></th>
-            <td><%= f.number_field :tax_included_price, placeholder: "1000", class: "form-control" %></td>
+            <td><%= f.number_field :tax_included_price, placeholder: "1000", class: "form-control", required: true %></td>
             <td>円</td>
           </tr>
           <tr>

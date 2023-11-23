@@ -8,6 +8,7 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @customer = @order.customer
     @order_details = @order.order_details
+    @order_detail = OrderDetail.find(params[:id])
     
   end
   
