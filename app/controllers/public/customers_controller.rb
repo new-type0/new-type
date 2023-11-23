@@ -10,7 +10,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     customer = Customer.find(params[:id])
-    customer.update(customer_params)
+    customer.update(is_active: true)
     redirect_to public_customers_my_page_path(current_customer)
   end
 
@@ -21,7 +21,7 @@ class Public::CustomersController < ApplicationController
   def unsubscribe
     @customer = Customer.find(params[:id])
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
-    @customer.update(is_active: false)
+    @customer.update(is_active: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
