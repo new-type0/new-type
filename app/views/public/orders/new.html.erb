@@ -11,11 +11,12 @@
     
       <div class="col-12 mr-2">
         <p>
-          <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-          <%= f.label :payment_method_credit_card, "クレジットカード" %>
+          <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: "checked" %>
+          <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
          <br>
           <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-          <%= f.label :payment_method_transfer, "銀行振込" %>
+          <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+          
         </p>        
       </div>
 
