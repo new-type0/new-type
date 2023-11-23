@@ -1,14 +1,14 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_customer!
+  before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
     @addresses = current_customer.addresses
-    @addresses = Address.all
     @address = Address.new
   end
 
   def create
-    @address = current_customer.addresses.new(address_params)
+    @address = current_customer.addresses.build(address_params)
     if @address.save
       redirect_to public_addresses_path, notice: '登録完了しました。'
     else
@@ -18,13 +18,10 @@ class Public::AddressesController < ApplicationController
     end
   end
 
-
   def edit
-    @address = Address.find(params[:id])
   end
 
   def update
-    @address = Address.find(params[:id])
     if @address.update(address_params)
       redirect_to public_addresses_path, notice: '更新に成功しました。'
     else
@@ -33,13 +30,15 @@ class Public::AddressesController < ApplicationController
   end
 
   def destroy
-    @address = Address.find(params[:id])
     @address.destroy
     redirect_to public_addresses_path, notice: '削除完了しました。'
   end
 
-
   private
+
+  def set_address
+    @address = current_customer.addresses.find(params[:id])
+  end
 
   def address_params
     params.require(:address).permit(:name, :address, :postal_code, :customer_id)

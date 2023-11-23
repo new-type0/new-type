@@ -6,7 +6,7 @@ class Customer < ApplicationRecord
          
   has_many :addresses
   has_many :cart_items
-
+  has_many :oders
   has_many :addresses
 
   enum is_active: {active: true, non_active: false}
