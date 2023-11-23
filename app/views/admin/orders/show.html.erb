@@ -1,7 +1,7 @@
 <div class="container">
-  
+
   <div class="row">
-    
+
     <h4>注文履歴詳細</h4>
     <table class="table table-borderless">
       <tr>
@@ -14,24 +14,24 @@
       </tr>
       <tr>
         <th>配送先</th>
-        <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
+        <td>〒<%= @order.shipping_postal_code %> <%= @order.shipping_address %><br><%= @order.shipping_name %></td>
       </tr>
       <tr>
         <th>支払方法</th>
-        <td><%= @order.payment_method %></td>
+        <td><%= @order.payment_method_i18n %></td>
       </tr>
       <tr>
         <th>注文ステータス</th>
         <td>
-          <%= form_with model:order, url: admin_order_path(order), method: :patch do |f| %>
-            <%= f.select :order_status, options_for_select(Order.order_statuses.map {|key, value| [I18n.t("order_statuses.#{value}"), key]}),{},{class: "form-control"} %>
+          <%= form_with model: @order, url: admin_order_path(@order), method: :patch do |f| %>
+            <%= f.select :order_status, options_for_select(Order.order_statuses_i18n.map {|key, value| [value, key]}, @order.order_status),{class: "form-control"} %>
             <%= f.submit '更新', class:"btn btn-success" %>
           <% end %>
         </td>
       </tr>
     </table>
   </div>
-  
+
   <div class="row">
     <div class="col-md-7 offset-md-1">
       <table class="table table-hover">
@@ -47,13 +47,13 @@
         <tbody>
           <% @order_details.each do |order_detail| %>
           <tr>
-            <td><%= order_detail.item.name %></td>  
+            <td><%= order_detail.item.name %></td>
             <td><%= order_detail.tax_included_price %></td>
             <td><%= order_detail.amount %></td>
             <td><%= ((order_detail.tax_included_price)*(order_detail.amount)) %></td>
             <td>
-              <%= form_with model:order_detail, url: admin_order_details_path(order_detail) do |f| %>
-                <%= f.select :production_status, option_for_select(OrderDetail.production_statuses.map {|key, value| [I18n.t("production_statuses.#{value}"), key]}),{},{class:"form-control"} %>
+              <%= form_with model: @order_detail, url: admin_order_detail_path(@order_detail), method: :patch do |f| %>
+                <%= f.select :production_status, options_for_select(OrderDetail.production_statuses_i18n.map {|key, value| [value, key]}, @order_detail.production_status),{class:"form-control"} %>
                 <%= f.submit '更新', class:"btn btn-success" %>
               <% end %>
             </td>
@@ -77,8 +77,8 @@
           <th class="text-end"><%= (@order.billing_amount+@order.postage) %>円</th>
         </tr>
       </table>
-      
+
     </div>
   </div>
-  
+
 </div>
