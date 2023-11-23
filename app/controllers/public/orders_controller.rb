@@ -4,18 +4,19 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = Address.all
   end
 
   def confirm
     @order = Order.new(order_params)
-
+    
     if params[:order][:address_option] == "0"
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
       @order.shipping_name = current_customer.last_name + current_customer.family_name
 
     elsif params[:order][:address_option] == "1"
-      ship = Address.find(params[:order][:customer_id])
+      @address = Address.find(params[:order][:address_id])
       @order.shipping_postal_code = ship.post_code
       @order.shipping_address = ship.address
       @order.shipping_name = ship.name
@@ -29,25 +30,31 @@ class Public::OrdersController < ApplicationController
       render 'new'
     end
     
-    @cart_items = current_customer.cart_items.all
+    # @cart_items = current_customer.cart_items
+    @cart_items = CartItem.where(customer_id: current_customer.id)
+    @order_new = Order.new
+    render 'confirm'
     
   end
   
   def create
+    
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
+    @cart_items = current_customer.cart_items.all
     @order.save
     
-    current_customer.cart_items.each do |cart_item|
-      @ordered_item = OrderDetail.new
-      @ordered_item.order_id = @order.id
-      @ordered_item.item_id = cart_item.item_id
-      @ordered_item.quantity = cart_item.quantity
-      @ordered_item.tax_included_price = cart_item.item.tax_included_price
-      @ordered_item.save
+    @cart_items.each do |cart_item|
+      
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.order_id = @order.id
+      @order_detail.amount = cart_item.amount
+      @order_detail.tax_included_price = cart_item.item.tax_included_price
+      @order_detail.production_status = 1
+      @order_detail.save
     end
-    
-    current_customer.cat_items.destroy_all?
+
+    @cart_items.destroy_all
     redirect_to public_orders_thanks_path
 
   end
@@ -68,8 +75,5 @@ class Public::OrdersController < ApplicationController
 private
   def order_params
     params.require(:order).permit(:customer_id, :postage, :shipping_name, :shipping_address, :shipping_postal_code, :payment_method, :billing_amount, :order_status, :address_option)
-
   end
-
-
 end
