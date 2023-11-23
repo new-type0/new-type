@@ -9,14 +9,14 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-
+    
     if params[:order][:address_option] == "0"
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
       @order.shipping_name = current_customer.last_name + current_customer.family_name
 
     elsif params[:order][:address_option] == "1"
-      ship = Address.find(params[:order][:customer_id])
+      @address = Address.find(params[:order][:address_id])
       @order.shipping_postal_code = ship.post_code
       @order.shipping_address = ship.address
       @order.shipping_name = ship.name
@@ -38,20 +38,22 @@ class Public::OrdersController < ApplicationController
   end
   
   def create
+    
     @order = Order.new(order_params)
-    @order.save
     @cart_items = current_customer.cart_items.all
+    @order.save
     
     @cart_items.each do |cart_item|
+      
       @order_detail = OrderDetail.new
-      @order_detail.item_id = cart_item.item_id
-      @order_detail.order_id = @order_id
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.order_id = @order.id
       @order_detail.amount = cart_item.amount
       @order_detail.tax_included_price = cart_item.item.tax_included_price
       @order_detail.production_status = 1
       @order_detail.save
     end
-    
+
     @cart_items.destroy_all
     redirect_to public_orders_thanks_path
 
@@ -73,8 +75,5 @@ class Public::OrdersController < ApplicationController
 private
   def order_params
     params.require(:order).permit(:customer_id, :postage, :shipping_name, :shipping_address, :shipping_postal_code, :payment_method, :billing_amount, :order_status, :address_option)
-
   end
-
-
 end

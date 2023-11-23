@@ -28,7 +28,7 @@
               </tr>
               <% total += (cart_item.item.tax_included_price * cart_item.amount) %>
             <% end %>
-            
+
           </tbody>
         </table>
 
@@ -65,14 +65,16 @@
         </tr>
       </table>
 
-    <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
-      <%= f.hidden_field :customer_id %>
-      <%= f.hidden_field :postage %>
-      <%= f.hidden_field :shipping_name %>
-      <%= f.hidden_field :shipping_address %>
-      <%= f.hidden_field :shipping_postal_code %>
-      <%= f.hidden_field :payment_method %>
-      <%= f.hidden_field :order_status %>
+
+    <%= form_with model: @order_new, url: public_orders_path, method: :post do |f| %>
+      <%= f.hidden_field :customer_id, value: current_customer.id %>
+      <%= f.hidden_field :postage, value: 800 %>
+      <%= f.hidden_field :shipping_name, value: @order.shipping_name %>
+      <%= f.hidden_field :shipping_address, value: @order.shipping_address %>
+      <%= f.hidden_field :shipping_postal_code, value: @order.shipping_postal_code %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :billing_amount, value: total + 800 %>
+      <%= f.hidden_field :order_status, value: "waiting_for_payment" %>
       <%= f.submit "注文を確定する", class: "btn btn-success" %>
     <% end %>
 
