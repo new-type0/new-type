@@ -2,7 +2,7 @@
 <h2 class="m-3">ショッピングカート</h2>
 <div class="container" >
     <div class="text-right">
-        <%= link_to "カートを空にする", public_cart_item_cart_items_destroy_all_path(current_customer), method: :delete, class:"btn btn-danger" %>
+        <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %>
     </div>
     <div class="d-flex justify-content-center m-3">
         <table border=3 >
@@ -17,7 +17,7 @@
             <tr>
                 <td>
                     <%= image_tag cart_item.item.image, style: "width: 150px; height: 150px;" %>
-                    <%= cart_item.item.name%>
+                    <%= cart_item.item.name %>
                 </td>
                 <td><%= cart_item.item.tax_included_price %></td>
                 <td>
@@ -35,7 +35,7 @@
                      <% end %>
                 </td>
                 <td>
-                    <%= button_to "削除", public_cart_item_path(cart_item.id), method: :delete, data: { confirm: "商品を削除しますか？" }, class:"btn btn-danger" %>
+                    <%= button_to "削除", public_path(cart_item.id), method: :delete, data: { confirm: "商品を削除しますか？" }, class:"btn btn-danger" %>
                 </td>
             </tr>
             <% end %>
