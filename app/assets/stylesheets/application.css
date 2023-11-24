@@ -27,7 +27,7 @@ footer {
    margin-top: auto;
 }
 
- h2, h3, nav_color {
+ h2, h3, .nav_color li, .genre_title {
    font-family: 'Zen Maru Gothic', serif;
    font-weight: 700;
    color: #492e06;

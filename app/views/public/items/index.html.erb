@@ -1,36 +1,40 @@
-<div class="mt-4 text-center">
-  <%= image_tag 'ribon_1.png' %>
-  <h2>商品一覧</h2>
-  <%= image_tag 'ribon_1.png' %>
-</div>
-<div class="flex flex-wrap justify-center md:justify-start px-5">
-  <%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(latest: true), button_class: 'btn-success', link_text: '新着順' } %>
-  <%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_high_to_low: true), button_class: 'btn-danger', link_text: '価格が高い順' } %>
-  <%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_low_to_high: true), button_class: 'btn-primary', link_text: '価格が安い順' } %>
-</div>
-<div class="row justify-content-start main">
-  <div class="col-2 mx-4">
-    <%= render 'layouts/search', genres: @genres %>
-  </div>
-  <div class="col-8">
-    <div class="row row-cols-4">
-      <% @items.each do |item| %>
-        <div class="col-3">
-          <%= link_to public_item_path(item.id) do %>
-            <%= image_tag item.image, style: "max-width: 100%; height: auto;" %>
-          <% end %>
-          <%= item.name %><br>
-          <div class="form-check-inline">
-            <h4>¥<%= item.tax_included_price.floor.to_s(:delimited) %></h4>
-            <span><small>(税込)</small></span>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col justify-content-center">
-        <%= paginate @items %>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-12 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">商品一覧</h3>
       </div>
     </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3 px-0'>
+      <%= render 'layouts/search', genres: @genres %>
+    </div>
+
+      <div class='col-md-8 offset-md-1 px-0'>
+
+        <table class="mx-auto mb-2">
+          <tr>
+            <td><%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(latest: true), button_class: 'btn-success', link_text: '　 新 着 順 　' } %></td>
+            <td><%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_high_to_low: true), button_class: 'btn-danger', link_text: '価格が高い順' } %></td>
+            <td><%= render partial: 'public/shared/sort_links', locals: { path: public_items_path(price_low_to_high: true), button_class: 'btn-primary', link_text: '価格が安い順' } %></td>
+          </tr>
+        </table>
+
+        <div class='row'>
+          <% @items.each do |item| %>
+          <div class='col-md-3 mb-4'>
+            <%= link_to public_item_path(item.id) do %>
+              <%= image_tag item.image, size: "165x165", class: "w-100 rounded-lg" %>
+            <% end %>
+            <p class="mt-2 mb-0"><%= item.name %></p>
+            <span><%= number_to_currency(item.tax_included_price, unit: "¥", strip_insignificant_zeros: true) %></span>
+          </div>
+          <% end %>
+        </div>
+      </div>
   </div>
 </div>
