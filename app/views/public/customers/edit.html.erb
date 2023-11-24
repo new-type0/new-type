@@ -7,27 +7,27 @@
     </div>
   </div>
 </div>
-
 <div class='container'>
   <div class='row'>
     <div class="col-md-10 bg-white p-5 mx-auto rounded-lg">
-
       <%= form_with model: @customer, url: public_customer_path(current_customer), method: :patch do |f| %>
       <div>
         <table>
           <tr>
             <td>名前</td>
             <td><%= f.label :"(姓)" %></td>
-            <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
-            <td><%= f.label :"(名)" %></td>
-            <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
+            <td>
+              <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %>
+              <%= f.label :"　(名)　" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+            </td>
           </tr>
           <tr>
-            <td>フリガナ</td>
+           <td>フリガナ</td>
             <td><%= f.label :"(セイ)" %></td>
-            <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
-            <td><%= f.label :"(メイ)" %></td>
-            <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %></td>
+            <td>
+              <%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %>
+              <%= f.label :"　(メイ)" %><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+            </td>
           </tr>
           <tr>
             <td>メールアドレス</td>
@@ -52,9 +52,8 @@
           <tr>
             <td></td>
             <td></td>
-            <td><%= f.submit "　 編集内容を保存 　", class:"btn btn-success mt-3" %></td>
-            <td></td>
-            <td><%= link_to "　 退会する 　", public_customers_confirm_path, class:"btn btn-danger mt-3" %></td>
+            <td><%= f.submit "編集内容を保存", class:"btn btn-success m-1" %></td>
+            <td><%= link_to "退会する", public_customers_confirm_path, class:"btn btn-danger m-1" %></td>
           </tr>
         </table>
       </div>
