@@ -4,19 +4,18 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @addresses = Address.all
   end
 
   def confirm
     @order = Order.new(order_params)
-    
+
     if params[:order][:address_option] == "0"
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
       @order.shipping_name = current_customer.last_name + current_customer.family_name
 
     elsif params[:order][:address_option] == "1"
-      @address = Address.find(params[:order][:address_id])
+      ship = Address.find(params[:order][:customer_id])
       @order.shipping_postal_code = ship.post_code
       @order.shipping_address = ship.address
       @order.shipping_name = ship.name
@@ -29,18 +28,14 @@ class Public::OrdersController < ApplicationController
     else
       render 'new'
     end
-    
-    # @cart_items = current_customer.cart_items
-    @cart_items = CartItem.where(customer_id: current_customer.id)
-    @order_new = Order.new
-    render 'confirm'
-    
-  end
-  
-  def create
-    
-    @order = Order.new(order_params)
+
     @cart_items = current_customer.cart_items.all
+
+  end
+
+  def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
     @order.save
     
     @cart_items.each do |cart_item|
@@ -52,14 +47,13 @@ class Public::OrdersController < ApplicationController
       @order_detail.tax_included_price = cart_item.item.tax_included_price
       @order_detail.production_status = 0
       @order_detail.save
-    end
 
-    @cart_items.destroy_all
+    current_customer.cat_items.destroy_all?
     redirect_to public_orders_thanks_path
 
   end
-  
-  
+
+
   def thanks
   end
 
@@ -76,5 +70,8 @@ class Public::OrdersController < ApplicationController
 private
   def order_params
     params.require(:order).permit(:customer_id, :postage, :shipping_name, :shipping_address, :shipping_postal_code, :payment_method, :billing_amount, :order_status, :address_option)
+
   end
+
+
 end

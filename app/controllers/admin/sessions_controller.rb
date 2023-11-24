@@ -25,6 +25,10 @@ class Admin::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  def after_sign_in_path(admin)
+    admin_path
+  end
+
   protected
 
   def configure_permitted_parameters

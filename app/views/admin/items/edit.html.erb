@@ -1,31 +1,39 @@
-<div class="container mt-5">
-  <div class="row ml-5">
-    <h4>商品新規登録</h4>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-10 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">商品編集</h3>
+      </div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-10 bg-white p-5 mx-auto rounded-lg">
+
       <%= form_with model: @item, url: admin_item_path(@item),　method: :patch, local: true, class: "xl:w-8/12 md:w-10/12", data: { turbo: false } do |f| %>
         <%= render "admin/shared/error_messages", resource: @item %>
          <table class="table table-borderless">
           <tr>
             <th scope="col" class="mt-2 mb-2"><%= f.label :image, "商品画像" %></th>
-            <td><%= f.file_field :image %></td>
+            <td><%= f.file_field :image, required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :name, "商品名" %></th>
-            <td><%= f.text_field :name, placeholder: "商品名", class: "form-control" %></td>
+            <td><%= f.text_field :name, placeholder: "商品名", class: "form-control", required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :introduction, "商品説明" %></th>
-            <td><%= f.text_area :introduction, rows: "5", placeholder: "ここに説明文を記述します", class: "form-control" %></td>
+            <td><%= f.text_area :introduction, rows: "5", placeholder: "ここに説明文を記述します", class: "form-control", required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :genre_id, "ジャンル" %></th>
-            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select" %></td>
+            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select", required: true %></td>
           </tr>
           <tr>
             <th scope="col" class="mb-2"><%= f.label :tax_included_price, "税抜価格" %></th>
-            <td><%= f.number_field :tax_included_price, placeholder: "1000", class: "form-control" %></td>
+            <td><%= f.number_field :tax_included_price, placeholder: "1000", class: "form-control", required: true %></td>
             <td>円</td>
           </tr>
           <tr>
@@ -43,6 +51,7 @@
           </tr>
         </table>
       <% end %>
+
     </div>
   </div>
 </div>
