@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    get '/' => 'homes#top'
   end
 
   namespace :public do
@@ -19,8 +20,9 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create, :show, :new]
     post 'orders/confirm', to: 'orders#confirm'
     resources :cart_items, only: [:index, :update, :create, :destroy]
-    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all' #deketeメソッドちゃんと機能してる？
-    resources :customers, only: [:edit, :update, :show]
+    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
+    resources :customers, only: [:edit, :update]
+      get 'customers/my_page' => 'customer#show'
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
     resources :items, only: [:index, :show]
@@ -32,7 +34,7 @@ devise_for :customers, skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 
-devise_for :admin, skip: [:passwords], controllers: {
+devise_for :admin, skip: [:registrations,:passwords], controllers: {
   sessions: "admin/sessions"
 }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
