@@ -50,7 +50,7 @@ class Public::OrdersController < ApplicationController
       @order_detail.order_id = @order.id
       @order_detail.amount = cart_item.amount
       @order_detail.tax_included_price = cart_item.item.tax_included_price
-      @order_detail.production_status = 1
+      @order_detail.production_status = 0
       @order_detail.save
     end
 
@@ -65,6 +65,7 @@ class Public::OrdersController < ApplicationController
 
   def index
      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
+     @order_detail = OrderDetail.where(order.id)
   end
 
   def show
