@@ -17,6 +17,7 @@
             <% @cart_items.each do |cart_item| %>
               <tr>
                 <td>
+                  <%= image_tag cart_item.item.image, style: "width: 150px; height: 150px;" %>
                   <%= cart_item.item.name %>
                 </td>
                 <td><%= cart_item.item.tax_included_price %></td>
@@ -53,7 +54,7 @@
       <table>
         <tr>
           <th class=col-md-3>支払方法</th>
-          <td><%= @order.payment_method_i18n %></td>
+          <td><%= @order.payment_method %></td>
         </tr>
         <tr>
           <th class=col-md-3>お届け先</th>
@@ -66,7 +67,7 @@
       </table>
 
 
-    <%= form_with model: @order_new, url: public_orders_path, method: :post do |f| %>
+    <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
       <%= f.hidden_field :customer_id, value: current_customer.id %>
       <%= f.hidden_field :postage, value: 800 %>
       <%= f.hidden_field :shipping_name, value: @order.shipping_name %>

@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
 
   namespace :admin do
-    resources :oders, only: [:update, :show]
+    resources :orders, only: [:index, :update, :show]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    get '/' => 'homes#top'
+     resources :order_details, only: [:update]
+    get '/' => 'orders#index'
   end
 
   namespace :public do
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :update, :create, :destroy]
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
     resources :customers, only: [:edit, :update]
-      get 'customers/my_page' => 'customer#show'
+      get 'customers/my_page' => 'customers#show'
       patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
       get 'customers/confirm', to: 'customers#confirm'
     resources :items, only: [:index, :show]
