@@ -5,6 +5,8 @@ class Item < ApplicationRecord
     validates :tax_included_price
     validates :image
   end
+  
+  validates :genre_id, presence: true, unless: -> { genre_id.blank? }
 
   has_one_attached :image
   scope :price_high_to_low, -> { order(tax_included_price: :desc) }

@@ -4,6 +4,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = current_customer.addresses
   end
 
   def confirm
@@ -35,19 +36,20 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
+    @cart_items = current_customer.cart_items.all
     @order.save
-
-    current_customer.cart_items.each do |cart_item|
-      @ordered_item = OrderDetail.new
-      @ordered_item.order_id = @order.id
-      @ordered_item.item_id = cart_item.item_id
-      @ordered_item.quantity = cart_item.quantity
-      @ordered_item.tax_included_price = cart_item.item.tax_included_price
-      @ordered_item.save
+    
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.order_id = @order.id
+      @order_detail.amount = cart_item.amount
+      @order_detail.tax_included_price = cart_item.item.tax_included_price
+      @order_detail.production_status = 0
+      @order_detail.save
     end
 
-    current_customer.cat_items.destroy_all?
+    current_customer.cart_items.destroy_all
     redirect_to public_orders_thanks_path
 
   end
@@ -58,6 +60,7 @@ class Public::OrdersController < ApplicationController
 
   def index
      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
+     @order_detail = OrderDetail.where(order.id)
   end
 
   def show

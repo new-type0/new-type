@@ -7,7 +7,7 @@ ja:
       order_status:
         waiting_for_payment: "入金待ち"
         payment_confirmation: "入金確認"
-        production: "制作中"
+        production: "製作中"
         prepairing: "発送準備中"
         sent: "発送済み"
     order_detail:
@@ -36,4 +36,9 @@ ja:
                 blank: "税抜価格は必須項目です。"
               image:
                 blank: "商品画像は必須項目です。"
-              genre: "ジャンルは必須項目です。"
+              genre_id:
+                blank: "ジャンルは必須項目です。"
+          genre:
+            attributes:
+              name:
+                blank: "ジャンル名は必須項目です。"
