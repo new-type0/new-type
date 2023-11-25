@@ -7,7 +7,6 @@ class Public::CartItemsController < ApplicationController
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
-#12行目一部削除した
   def create
       if @cart_item
         @cart_item.amount += params[:amount].to_i
@@ -44,9 +43,7 @@ class Public::CartItemsController < ApplicationController
     redirect_to public_cart_items_path(current_customer)
   end
 
-
   def edit
-
   end
 
   def set_cart_item
