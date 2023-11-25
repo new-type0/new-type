@@ -11,7 +11,8 @@
 <div class='container'>
   <div class='row'>
     <div class="col-md-6 bg-white p-5 mx-auto rounded-lg">
-      <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
+      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
+
         <td><%= f.label :"ジャンル名", class: "m-3" %></td>
         <td><%= f.text_field :name, class: "m-3" %></td>
         <td><%= f.submit "変更を保存", class: "btn btn-success m-3" %></td>
