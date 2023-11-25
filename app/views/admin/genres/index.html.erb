@@ -13,13 +13,13 @@
     <div class="col-md-6 bg-white p-5 mx-auto rounded-lg">
 
       <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
-        <td><%= f.label :"ジャンル名", class: "m-3" %></td>
+        <th><%= f.label :"ジャンル名", class: "m-3" %></th>
         <td><%= f.text_field :name, class: "m-3" %></td>
         <td><%= f.submit "新規登録", class: "btn btn-success m-3" %></td>
       <% end %>
 
       <table class = "table table-hover table-inverse col-md-11 m-3">
-        <thead>
+        <thead class="thead-light">
           <tr>
             <th>ジャンル</th>
             <th colspan="1"></th>

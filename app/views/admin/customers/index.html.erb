@@ -12,7 +12,7 @@
   <div class='row'>
     <div class="col-md-9 bg-white p-5 mx-auto rounded-lg">
       <table class="table">
-        <thead>
+        <thead class="thead-light">
           <tr>
             <th>会員ID</th>
             <th>氏名</th>
@@ -29,16 +29,22 @@
               <td><%= customer.email %></td>
               <td>
                 <% if customer.is_active == false %>
-                有効
+                  <span class="text-muted font-weight-bold">無効</span>
                 <% else %>
-                無効
+                  <span class="text-success font-weight-bold">有効</span>
                 <% end %>
               </td>
             </tr>
             <% end %>
-            <%= paginate @customers %>
         </tbody>
       </table>
+
+      <div class='row'>
+        <div class="col-md-3 px-0 mx-auto">
+          <%= paginate @customers %>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

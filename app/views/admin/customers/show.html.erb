@@ -2,7 +2,7 @@
   <div class='row'>
     <div class="col-md-6 px-0 mx-auto">
       <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
-        <h3 class="mb-0"><%= @customer.family_name %> <%= @customer.last_name %> さんの会員情報詳細</h3>
+        <h3 class="mb-0"><%= @customer.family_name %> <%= @customer.last_name %> さんの会員詳細</h3>
       </div>
     </div>
   </div>
@@ -12,47 +12,47 @@
   <div class='row'>
     <div class="col-md-6 bg-white p-5 mx-auto rounded-lg">
 
-      <table>
+      <table class="table">
         <tr>
-          <td>会員ID</td>
+          <th>会員ID</th>
           <td><%= @customer.id%></td>
         </tr>
         <tr>
-          <td>氏名</td>
+          <th>氏名</th>
           <td><%= @customer.family_name %><%= @customer.last_name %></td>
         </tr>
         <tr>
-          <td>カナ</td>
+          <th>カナ</th>
           <td><%= @customer.family_name_kana %><%= @customer.last_name_kana %></td>
         </tr>
         <tr>
-          <td>郵便番号</td>
+          <th>郵便番号</th>
           <td><%= @customer.postal_code %></td>
         </tr>
         <tr>
-          <td>住所</td>
+          <th>住所</th>
           <td><%= @customer.address %></td>
         </tr>
         <tr>
-          <td>電話番号</td>
+          <th>電話番号</th>
           <td><%= @customer.phone_number %></td>
         </tr>
         <tr>
-          <td>メールアドレス</td>
+          <th>メールアドレス</th>
           <td><%= @customer.email %></td>
         </tr>
         <tr>
-          <td>会員ステータス</td>
-          <td><%= I18n.t("enums.customer.is_active.#{@customer.is_active}") %></td>
+          <th>会員ステータス</th>
+          <td class="<%= @customer.is_active ? 'text-success font-weight-bold' : 'text-muted font-weight-bold' %>">
+            <%= I18n.t("enums.customer.is_active.#{@customer.is_active}") %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></td>
+          <td><%= link_to "注文履歴一覧を見る", public_addresses_path, class: "btn btn-primary" %></td>
         </tr>
       </table>
 
-      <table>
-        <tr>
-          <td><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success mt-3 mr-3" %></td>
-          <td><%= link_to "注文履歴一覧を見る", public_addresses_path, class: "btn btn-primary mt-3" %></td>
-        </tr>
-      </table>
 
     </div>
   </div>
