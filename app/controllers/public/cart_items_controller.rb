@@ -7,17 +7,16 @@ class Public::CartItemsController < ApplicationController
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
-#12行目一部削除した
   def create
       if @cart_item
-        @cart_item.amount += params[:amount].to_i
+        @cart_item.amount += params[:cart_item][:amount].to_i
         @cart_item.save
-        redirect_to public_cart_items_path(current_customer)
+        redirect_to public_cart_items_path
       else
         cart_item = CartItem.new(cart_item_params)
         cart_item.customer_id = current_customer.id
         cart_item.save
-        redirect_to public_cart_items_path(current_customer)
+        redirect_to public_cart_items_path
       end
   end
 
@@ -44,13 +43,11 @@ class Public::CartItemsController < ApplicationController
     redirect_to public_cart_items_path(current_customer)
   end
 
-
   def edit
-
   end
 
   def set_cart_item
-    @cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
+    @cart_item = current_customer.cart_items.find_by(params[:item_id])
   end
 
   # def increase_or_create(item_id)
