@@ -29,6 +29,7 @@ class Admin::SessionsController < Devise::SessionsController
     admin_path
   end
 
+
   protected
 
   def configure_permitted_parameters
