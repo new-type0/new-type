@@ -60,12 +60,19 @@ class Public::OrdersController < ApplicationController
 
   def index
      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
-     @order_detail = OrderDetail.where(order_id: @orders.id)
+     @order_detail = OrderDetail.where(@order)
+
   end
 
   def show
     @order = Order.find(params[:id])
-    @order_details= OrderDetail.where(order_id: @order.id)
+    @order_details = OrderDetail.where(order_id: @order.id)
+
+    # Calculate subtotal
+    @subtotal = @order_details.sum { |order_detail| order_detail.amount * order_detail.tax_included_price }
+
+    # Set postage
+    @order.postage = 800
   end
 
 private
