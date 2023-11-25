@@ -1,11 +1,14 @@
-<div style="position: relative; text-align: center; margin-top: 20px;">
-  <img src="<%= asset_path('ribon04.png') %>" alt="Your Image" style="max-width: 100%; max-height: 100%; display: inline-block;">
-  <div style="position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); color: dark; font-size: 24px; font-weight: bold;">
-    注文一覧
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-9 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">注文履歴一覧</h3>
+      </div>
+    </div>
   </div>
 </div>
-<div class="row mt-3">
-  <div class="col-10 offset-1">
+<div class="row bg-white p-4 mx-5 rounded-lg">
+  <div class="col-11 mx-5">
     <table class="table table-bordered border-dark">
       <tr class="table-secondary">
         <th style="width: 15%;">注文日</th>
@@ -19,14 +22,21 @@
         <tr>
           <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
           <td>
-            〒<%= order.post_code %><br>
-            <%= order.address %><br>
-            <%= order.name %>
+            〒<%= order.shipping_postal_code %><br>
+            <%= order.shipping_address %><br>
+            <%= order.shipping_name %>
           </td>
-          <td><%= order.item.name %></td>
-          <td><%= order.billing_amount %></td>
-          <td><%= order.status_i18n %></td>
-          <td><%= link_to "表示する", public_order_path, class: 'btn btn-sm btn-primary' %></td>
+          <td>
+            <% order.order_details.each do |order_detail| %>
+              <%= order_detail.item.name %>
+            <% end %>
+          </td>
+          <td><%= order.billing_amount %>円</td>
+          <td><%= order.order_status_i18n %></td>
+          <td><%= @order_detail.name %></td>
+          <td><%= @order_detail.tax_included_price %></td>
+          <td><%= @order_detail.order_status %></td>
+          <td><%= link_to "表示する", public_order_path(order), class: 'btn btn-sm btn-primary' %></td>
         </tr>
       <% end %>
     </table>

@@ -1,20 +1,14 @@
 <div class='container'>
   <div class='row'>
-    <div class="col-md-12 px-0 mx-auto">
-      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
-        <h3 class="mb-0">商品一覧</h3>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class='container'>
-  <div class='row'>
-    <div class='col-md-3 px-0'>
+    <div class='col-md-3 px-0 mt-5'>
       <%= render 'layouts/search', genres: @genres %>
     </div>
 
       <div class='col-md-8 offset-md-1 px-0'>
+
+        <div class='title_border text-center pt-1 pb-1 mb-4 mt-5'>
+          <h3 class="mb-0">商品一覧</h3>
+        </div>
 
         <table class="mx-auto mb-2">
           <tr>
@@ -35,6 +29,11 @@
           </div>
           <% end %>
         </div>
+
+        <div class="col-md-4 mx-auto">
+          <%= paginate @items %>
+        </div>
+
       </div>
   </div>
 </div>

@@ -1,18 +1,14 @@
-<div class="text-center">
-  <div class="row mt-4 ml-5">
-    <div class="col-3">
-      <%= image_tag 'illust_1.png' %>
-    </div>
-    <div class="col-4">
-      <h2>配送先編集</h2>
-    </div>
-    <div class="col-3">
-      <%= image_tag 'illust_1.png' %>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-9 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">配送先編集</h3>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="container mt-5">
+<div class="container bg-white p-4 rounded-lg">
   <div class="col-md-12">
     <%= form_for @address, url: public_address_path(@address), method: :patch do |f| %>
       <div class="form-group row mt-3">

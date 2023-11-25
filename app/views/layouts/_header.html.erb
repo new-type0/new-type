@@ -10,7 +10,6 @@
           <li><%= link_to "マイページ", public_customers_my_page_path, class: 'nav-link text-dark' %></li>
           <li><%= link_to "商品一覧", public_items_path, class: 'nav-link text-dark' %></li>
           <li><%= link_to "カート", public_cart_items_path, class: 'nav-link text-dark' %></li>
-          <li><%= link_to "アバウト", public_about_path, class: 'nav-link text-dark' %></li>
           <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %></li>
 
         <% elsif admin_signed_in? %>
@@ -21,7 +20,7 @@
           <li><%= link_to "注文履歴一覧", admin_path, class: 'nav-link text-dark' %></li>
           <li><%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %></li>
           <li><%= link_to "アバウト", public_about_path, class: 'nav-link text-dark' %></li>
-          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %></li>
+          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, url: admin_session_path, class: 'nav-link text-dark' %></li>
 
         <% else %>
 

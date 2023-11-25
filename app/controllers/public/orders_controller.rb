@@ -16,8 +16,8 @@ class Public::OrdersController < ApplicationController
       @order.shipping_name = current_customer.last_name + current_customer.family_name
 
     elsif params[:order][:address_option] == "1"
-      ship = Address.find(params[:order][:customer_id])
-      @order.shipping_postal_code = ship.post_code
+      ship = Address.find(params[:order][:address_id])
+      @order.shipping_postal_code = ship.postal_code
       @order.shipping_address = ship.address
       @order.shipping_name = ship.name
 
@@ -38,7 +38,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items.all
     @order.save
-    
+
     @cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
       @order_detail.item_id = cart_item.item.id
@@ -60,12 +60,19 @@ class Public::OrdersController < ApplicationController
 
   def index
      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
-     @order_detail = OrderDetail.where(order.id)
+     @order_detail = OrderDetail.where(@order)
+
   end
 
   def show
     @order = Order.find(params[:id])
-    @order_details= OrderDetail.where(order_id: @order.id)
+    @order_details = OrderDetail.where(order_id: @order.id)
+
+    # Calculate subtotal
+    @subtotal = @order_details.sum { |order_detail| order_detail.amount * order_detail.tax_included_price }
+
+    # Set postage
+    @order.postage = 800
   end
 
 private
