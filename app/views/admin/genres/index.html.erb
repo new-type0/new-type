@@ -13,9 +13,9 @@
     <div class="col-md-6 bg-white p-5 mx-auto rounded-lg">
 
       <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
-
+      
         <td><%= f.label :"ジャンル名", class: "m-3" %></td>
-        <td><%= f.text_field :name, class: "m-3" %></td>
+        <td><%= f.text_field :name,include_blank: "ジャンル名は必須です。", class: "m-3", required: :true %></td>
         <td><%= f.submit "新規登録", class: "btn btn-success m-3" %></td>
       <% end %>
 

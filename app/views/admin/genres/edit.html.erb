@@ -14,7 +14,7 @@
       <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
 
         <td><%= f.label :"ジャンル名", class: "m-3" %></td>
-        <td><%= f.text_field :name, class: "m-3" %></td>
+        <td><%= f.text_field :name, include_blank: "ジャンル名は必須です。", class: "m-3", required: true %></td>
         <td><%= f.submit "変更を保存", class: "btn btn-success m-3" %></td>
       <% end %>
     </div>
