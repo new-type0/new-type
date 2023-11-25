@@ -16,8 +16,8 @@ class Public::OrdersController < ApplicationController
       @order.shipping_name = current_customer.last_name + current_customer.family_name
 
     elsif params[:order][:address_option] == "1"
-      ship = Address.find(params[:order][:customer_id])
-      @order.shipping_postal_code = ship.post_code
+      ship = Address.find(params[:order][:address_id])
+      @order.shipping_postal_code = ship.postal_code
       @order.shipping_address = ship.address
       @order.shipping_name = ship.name
 
@@ -61,6 +61,7 @@ class Public::OrdersController < ApplicationController
   def index
      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
      @order_detail = OrderDetail.where(@order)
+
   end
 
   def show

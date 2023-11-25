@@ -1,5 +1,6 @@
 <div class='container'>
   <div class='row'>
+
     <div class="col-md-9 px-0 mx-auto">
       <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
         <h3 class="mb-0">配送先登録/一覧</h3>
@@ -17,61 +18,75 @@
         </div>
       </div>
 
-      <div class="form-group row">
-        <%= f.label :address, "住所", class: "col-3 col-form-label" %>
-        <div class="col-6">
-          <%= f.text_field :address, placeholder: "高知県", class: "form-control", required: true %>
-        </div>
-      </div>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-10 bg-white p-5 mx-auto rounded-lg">
 
-      <div class="form-group row">
-        <%= f.label :address_name, "宛名", class: "col-3 col-form-label" %>
-        <div class="col-3">
-          <%= f.text_field :name, placeholder: "鳴瀬タカシ", class: "form-control", required: true %>
+      <%= form_for([current_customer, Address.new], url: public_addresses_path(current_customer)) do |f| %>
+        <div class="form-group row">
+          <%= f.label :address_postal_code, "郵便番号（ハイフンなし）", class: "col-4 col-form-label" %>
+          <div class="col-3">
+            <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control", required: true %>
+          </div>
         </div>
-        <div class="col-3 offset-3">
-          <%= f.submit "新規登録", class: "btn btn-success" %>
+
+        <div class="form-group row">
+          <%= f.label :address, "住所", class: "col-4 col-form-label" %>
+          <div class="col-6">
+            <%= f.text_field :address, placeholder: "高知県", class: "form-control", required: true %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="row mt-5">
-    <table class="table" style="border: 1px solid black;">
-      <thead class="thead-light">
-        <tr>
-          <th style="border: 1px solid black;">郵便番号</th>
-          <th style="border: 1px solid black; width: 40%;">住所</th>
-          <th style="border: 1px solid black;">宛名</th>
-          <th style="border: 1px solid black;"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @addresses.nil? %>
+
+        <div class="form-group row">
+          <%= f.label :address_name, "宛名", class: "col-4 col-form-label" %>
+          <div class="col-4">
+            <%= f.text_field :name, placeholder: "鳴瀬タカシ", class: "form-control", required: true %>
+          </div>
+          <div class="col-4">
+            <%= f.submit "新規登録", class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+
+    <div class="row mt-5">
+      <table class="table" style="border: 1px solid black;">
+        <thead class="thead-light">
           <tr>
-            <td colspan="4">
-              <p>@address is nil</p>
-            </td>
+            <th style="border: 1px solid black;">郵便番号</th>
+            <th style="border: 1px solid black; width: 40%;">住所</th>
+            <th style="border: 1px solid black;">宛名</th>
+            <th style="border: 1px solid black;"></th>
           </tr>
-        <% else %>
-          <td style="border: 1px solid black;"><%= current_customer.postal_code %></td>
-          <td style="border: 1px solid black;"><%= current_customer.address %></td>
-          <td style="border: 1px solid black;"><%= current_customer.family_name %><%= current_customer.last_name %></td>
-          <td style="border: 1px solid black;">
-            <%= link_to "編集する", edit_public_customer_path(current_customer.id), class: "btn btn-success text-center" %></td>
-          </td>
-          <% @addresses.each do |address| %>
+        </thead>
+        <tbody>
+          <% if @addresses.nil? %>
             <tr>
-              <td style="border: 1px solid black;"><%= address.postal_code %></td>
-              <td style="border: 1px solid black;"><%= address.address %></td>
-              <td style="border: 1px solid black;"><%= address.name %></td>
-              <td style="border: 1px solid black;">
-                <%= link_to "編集する", edit_public_address_path(address), class: "btn btn-success text-center" %>
-                <%= link_to "削除する", public_address_path(address), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger text-center" %>
+              <td colspan="4">
+                <p>@address is nil</p>
               </td>
             </tr>
+          <% else %>
+            <td style="border: 1px solid black;"><%= current_customer.postal_code %></td>
+            <td style="border: 1px solid black;"><%= current_customer.address %></td>
+            <td style="border: 1px solid black;"><%= current_customer.family_name %><%= current_customer.last_name %></td>
+            <td style="border: 1px solid black;">
+              <%= link_to "編集する", edit_public_customer_path(current_customer.id), class: "btn btn-success text-center" %></td>
+            </td>
+            <% @addresses.each do |address| %>
+              <tr>
+                <td style="border: 1px solid black;"><%= address.postal_code %></td>
+                <td style="border: 1px solid black;"><%= address.address %></td>
+                <td style="border: 1px solid black;"><%= address.name %></td>
+                <td style="border: 1px solid black;">
+                  <%= link_to "編集する", edit_public_address_path(address), class: "btn btn-success text-center" %>
+                  <%= link_to "削除する", public_address_path(address), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger text-center" %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+</div>
+</div>
 </div>

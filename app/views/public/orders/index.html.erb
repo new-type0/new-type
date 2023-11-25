@@ -33,6 +33,9 @@
           </td>
           <td><%= order.billing_amount %>円</td>
           <td><%= order.order_status_i18n %></td>
+          <td><%= @order_detail.name %></td>
+          <td><%= @order_detail.tax_included_price %></td>
+          <td><%= @order_detail.order_status %></td>
           <td><%= link_to "表示する", public_order_path(order), class: 'btn btn-sm btn-primary' %></td>
         </tr>
       <% end %>
