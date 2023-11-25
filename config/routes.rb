@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
+     get 'customers/confirm', to: 'customers#confirm'
+     patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     get 'orders/thanks', to: 'orders#thanks'
     resources :orders, only: [:index, :create, :show, :new]
