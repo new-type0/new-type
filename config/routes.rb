@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   namespace :public do
      get 'customers/confirm', to: 'customers#confirm'
-     patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
+     patch 'customers/unsubscribe', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     get 'orders/thanks', to: 'orders#thanks'
     resources :orders, only: [:index, :create, :show, :new]
@@ -26,8 +26,6 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
     resources :customers, only: [:edit, :update]
       get 'customers/my_page' => 'customers#show'
-      patch 'customers/unsubscribe/:id', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
-      get 'customers/confirm', to: 'customers#confirm'
     resources :items, only: [:index, :show]
     get 'homes/about' => 'homes#about', as: '/about'
   end
