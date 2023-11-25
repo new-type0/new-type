@@ -10,12 +10,12 @@ class Customer < ApplicationRecord
   has_many :oders
   has_many :addresses
 
-  enum is_active: {active: true, non_active: false}
+  enum is_active: {active: false, non_active: true}
 
   has_many :cart_items, dependent: :destroy
 
   def active_for_authentication?
-    super && (is_active == true)
+     super && (is_active == false)
   end
 
 end
