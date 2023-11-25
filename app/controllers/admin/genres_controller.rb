@@ -7,6 +7,7 @@ before_action :authenticate_admin!
   end
 
   def create
+    @genres = Genre.all
     @genre = Genre.new(genre_params)
     if @genre.save
       redirect_to edit_admin_genre_path
