@@ -19,14 +19,14 @@
         <tr>
           <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
           <td>
-            〒<%= order.post_code %><br>
-            <%= order.address %><br>
-            <%= order.name %>
+            〒<%= order.shipping_postal_code %><br>
+            <%= order.shipping_address %><br>
+            <%= order.shipping_name %>
           </td>
-          <td><%= order.item.name %></td>
-          <td><%= order.billing_amount %></td>
-          <td><%= order.status_i18n %></td>
-          <td><%= link_to "表示する", public_order_path, class: 'btn btn-sm btn-primary' %></td>
+          <td><%= @order_detail.name %></td>
+          <td><%= @order_detail.tax_included_price %></td>
+          <td><%= @order_detail.order_status %></td>
+          <td><%= link_to "表示する", public_order_path(order), class: 'btn btn-sm btn-primary' %></td>
         </tr>
       <% end %>
     </table>

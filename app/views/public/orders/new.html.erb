@@ -1,14 +1,22 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 m-3">
-      
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-8 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">支払情報入力</h3>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <h3 class="m-3">支払情報入力</h3>
-    
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-8 bg-white p-5 mx-auto rounded-lg">
+
     <%= form_with model: @order, url: public_orders_confirm_path, method: :post do |f| %>
-    
-    <h5 class="mt-3"><strong>支払方法</strong></h5>
-    
+
+    <h4><strong>支払方法</strong></h4>
+
       <div class="col-12 mr-2">
         <p>
           <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: "checked" %>
@@ -16,16 +24,16 @@
          <br>
           <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
           <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
-          
-        </p>        
+
+        </p>
       </div>
 
-      <h5 class="mt-3"><strong>お届け先</strong></h5>
+      <h4 class="mt-3"><strong>お届け先</strong></h4>
 
       <div class="col-12 mr-2">
         <p>
           <%= f.radio_button :address_option, 0, checked:"checked" %>
-          <%= f.label :order_address, "ご自身の住所" %>  
+          <%= f.label :order_address, "ご自身の住所" %>
 
           〒<%= current_customer.postal_code %>
           <%= current_customer.address %><br>
@@ -34,13 +42,13 @@
         <p>
           <%= f.radio_button :address_option, 1 %>
           <%= f.label :order_address, "登録済み住所から選択" %><br>
-          <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display), size: "50" %>  
+          <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display), size: "50" %>
         </p>
         <p>
           <%= f.radio_button :address_option, 2 %>
           <%= f.label :order_address, "新しいお届け先" %>
         </p>
-        
+
         <table>
           <tr>
             <td><%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)" %></td>
@@ -55,14 +63,14 @@
             <td><%= f.text_field :shipping_name, placeholder: "令和道子", size: "20" %></td>
           </tr>
         </table>
-        
+
       </div>
-      
-      <%= f.submit "確認画面へ進む" %>
-      
-    <% end %>  
-      
-    </div>      
+
+      <%= f.submit "確認画面へ進む", class:"btn btn-primary mt-3" %>
+
+    <% end %>
+
+    </div>
   </div>
-</div>  
+</div>
 

@@ -14,54 +14,54 @@
       <%= form_with model: @customer, url: admin_customer_path(id: @customer.id), method: :patch do |f| %>
       <table>
         <tr>
-          <td>会員ID</td>
+          <th>会員ID</th>
           <td></td>
-          <td><%= @customer.id %></td>
+          <th><%= @customer.id %></th>
           <!--<td><%#= f.text_field :id , class:"form-control"%></td>-->
         </tr>
 
         <tr>
-          <td>名前</td>
-          <td><%= f.label :"(姓)" %></td>
+          <th>名前</th>
+          <th><%= f.label :"(姓)" %></th>
           <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
-          <td><%= f.label :"(名)" %></td>
+          <th><%= f.label :"(名)" %></th>
           <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
         </tr>
 
         <tr>
-          <td>フリガナ</td>
-          <td><%= f.label :"(セイ)" %></td>
+          <th>フリガナ</th>
+          <th><%= f.label :"(セイ)" %></th>
           <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
-          <td><%= f.label :"(メイ)" %></td>
+          <th><%= f.label :"(メイ)" %></th>
           <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %></td>
         </tr>
 
         <tr>
-          <td>郵便番号</td>
+          <th>郵便番号</th>
           <td></td>
           <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
         </tr>
 
         <tr>
-          <td>住所</td>
+          <th>住所</th>
           <td></td>
           <td><%= f.text_field :address, :size=>"40", autofocus: true, autocomplete: "address" %></td>
         </tr>
 
         <tr>
-          <td>電話番号</td>
+          <th>電話番号</th>
           <td></td>
           <td><%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %></td>
         </tr>
 
         <tr>
-          <td>メールアドレス</td>
+          <th>メールアドレス</th>
           <td></td>
           <td><%= f.text_field :email, autofocus: true, autocomplete: "email" %></td>
         </tr>
 
         <tr>
-          <td>会員ステータス</td>
+          <th>会員ステータス</th>
           <td></td>
           <!--<td><%#= f.select :is_active, [["有効会員","false"], ["退会済み","true"]], class:"form-control" %></td>-->
           <td>

@@ -38,7 +38,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items.all
     @order.save
-    
+
     @cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
       @order_detail.item_id = cart_item.item.id
@@ -60,7 +60,7 @@ class Public::OrdersController < ApplicationController
 
   def index
      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
-     @order_detail = OrderDetail.where(order.id)
+     @order_detail = OrderDetail.where(order_id: @orders.id)
   end
 
   def show
