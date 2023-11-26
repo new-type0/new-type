@@ -66,3 +66,15 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.search{
+  height: 26px;
+  width: 200px;
+  border: 2px solid #492e06;
+  color: #C3C3C3;
+  border-radius: 10px;
+}
+
+.search p {
+  padding-bottom: 3px;
+}
