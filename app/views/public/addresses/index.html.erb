@@ -1,6 +1,5 @@
 <div class='container'>
   <div class='row'>
-
     <div class="col-md-9 px-0 mx-auto">
       <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
         <h3 class="mb-0">配送先登録/一覧</h3>
@@ -8,15 +7,6 @@
     </div>
   </div>
 </div>
-<div class="container bg-white p-4 rounded-lg">
-  <div class="col-md-12">
-    <%= form_for([current_customer, Address.new], url: public_addresses_path(current_customer)) do |f| %>
-      <div class="form-group row mt-3">
-        <%= f.label :address_postal_code, "郵便番号（ハイフンなし）", class: "col-3 col-form-label" %>
-        <div class="col-3">
-          <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control", required: true %>
-        </div>
-      </div>
 
 <div class='container'>
   <div class='row'>

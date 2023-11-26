@@ -26,16 +26,11 @@
             <%= order.shipping_address %><br>
             <%= order.shipping_name %>
           </td>
-          <td>
-            <% order.order_details.each do |order_detail| %>
-              <%= order_detail.item.name %>
-            <% end %>
-          </td>
-          <td><%= order.billing_amount %>円</td>
-          <td><%= order.order_status_i18n %></td>
-          <td><%= @order_detail.name %></td>
-          <td><%= @order_detail.tax_included_price %></td>
-          <td><%= @order_detail.order_status %></td>
+          <% order.order_details.each do |order_detail| %>
+            <td><%= order_detail.item.name %></td>
+             <td><%= order.billing_amount %>円</td>
+            <td><%= order.order_status_i18n %></td>
+          <% end %>
           <td><%= link_to "表示する", public_order_path(order), class: 'btn btn-sm btn-primary' %></td>
         </tr>
       <% end %>
