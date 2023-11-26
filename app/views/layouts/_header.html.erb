@@ -14,7 +14,7 @@
               <% if customer_signed_in? %>
 
                 <!--顧客ログイン時 -->
-                <li>ようこそ<%= current_customer.family_name + current_customer.last_name %>さん！</li>
+                <li class=" text-dark pt-2 pr-4">ようこそ<%= current_customer.family_name + current_customer.last_name %>さん！</li>
                 <li><%= link_to "マイページ", public_customers_my_page_path, class: 'nav-link text-dark' %></li>
                 <li><%= link_to "商品一覧", public_items_path, class: 'nav-link text-dark' %></li>
                 <li><%= link_to "カート", public_cart_items_path, class: 'nav-link text-dark' %></li>
