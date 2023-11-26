@@ -18,8 +18,8 @@ class Item < ApplicationRecord
   has_many :orders, through: :order_details
   has_many :cart_items, dependent: :destroy
 
-  def remove_tax_price
-    (self.tax_included_price/1.10).round
+  def add_tax_price
+    (self.tax_included_price*1.10).round
   end
 
 end
