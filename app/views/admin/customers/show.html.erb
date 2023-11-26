@@ -14,35 +14,35 @@
 
       <table>
         <tr>
-          <td>会員ID</td>
+          <th>会員ID</th>
           <td><%= @customer.id%></td>
         </tr>
         <tr>
-          <td>氏名</td>
+          <th>氏名</th>
           <td><%= @customer.family_name %><%= @customer.last_name %></td>
         </tr>
         <tr>
-          <td>カナ</td>
+          <th>カナ</th>
           <td><%= @customer.family_name_kana %><%= @customer.last_name_kana %></td>
         </tr>
         <tr>
-          <td>郵便番号</td>
+          <th>郵便番号</th>
           <td><%= @customer.postal_code %></td>
         </tr>
         <tr>
-          <td>住所</td>
+          <th>住所</th>
           <td><%= @customer.address %></td>
         </tr>
         <tr>
-          <td>電話番号</td>
+          <th>電話番号</th>
           <td><%= @customer.phone_number %></td>
         </tr>
         <tr>
-          <td>メールアドレス</td>
+          <th>メールアドレス</th>
           <td><%= @customer.email %></td>
         </tr>
         <tr>
-          <td>会員ステータス</td>
+          <th>会員ステータス　</th>
           <td><%= I18n.t("enums.customer.is_active.#{@customer.is_active}") %></td>
         </tr>
       </table>

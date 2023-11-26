@@ -20,6 +20,7 @@
         <tbody>
           <% total = 0 %>
           <% @cart_items.each do |cart_item| %>
+
             <tr>
               <td>
                 <%= image_tag cart_item.item.image, style: "width: 50px; height: 50px;" %>
@@ -32,6 +33,7 @@
                 <%= subtotal.to_s(:delimited) %>
               </td>
             </tr>
+          
             <% total += (cart_item.item.tax_included_price * cart_item.amount) %>
           <% end %>
         </tbody>
