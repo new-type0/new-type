@@ -5,7 +5,7 @@ class CartItem < ApplicationRecord
 
   def sum_of_price
   return 0 if item.nil? || amount.nil?
-    item.tax_included_price.to_i * amount
+    (item.tax_included_price*1.1).to_i * amount
   end
 
 end

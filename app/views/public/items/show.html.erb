@@ -17,7 +17,7 @@
         <div class="offset-md-1 col-md-6">  <!--商品情報表示用-->
           <h5 class="lead mb-4"><%= @item.introduction %></h5>
           <div class="form-check-inline">
-            <h4>¥<%= (@item.tax_included_price).floor.to_s(:delimited) %></h4>
+            <h4>¥<%= (@item.add_tax_price).floor.to_s(:delimited) %></h4>
             <span><small>(税込)</small></span>
           </div>
 

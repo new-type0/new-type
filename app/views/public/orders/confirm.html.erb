@@ -47,23 +47,43 @@
           <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
-              <th>送料</th>
-              <!--<% @order.postage = 800 %>-->
-              <td><%=@order.postage %></td>
+
+              <td>
+                <%= image_tag cart_item.item.image, style: "width: 50px; height: 50px;" %>
+                <%= cart_item.item.name %>
+              </td>
+              <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+              <td><%= cart_item.amount.to_s(:delimited) %></td>
+              <td>
+                <% subtotal = (cart_item.item.add_tax_price * cart_item.amount) %>
+                <%= subtotal.to_s(:delimited) %>
+              </td>
             </tr>
-            <tr>
-              <th>商品合計</th>
-              <td><%= total.to_i %></td>
-            </tr>
-            <tr>
-              <th>請求金額</th>
-              <% @order.billing_amount = @order.postage + total.to_i %>
-              <td><%= @order.billing_amount %></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+
+            <% total += (cart_item.item.add_tax_price * cart_item.amount) %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4 px-4 pt-5 mx-auto rounded-lg bg-white">
+      <table class="table table-bordered">
+        <tr>
+          <th style="width:30%">送料</th>
+          <td><%=@order.postage = 800.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th>商品合計</th>
+          <td><%= total.to_i.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th>請求金額</th>
+          <% @order.billing_amount = @order.postage + total.to_i %>
+          <td><%= @order.billing_amount.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 
       <table>
         <tr>
