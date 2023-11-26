@@ -6,7 +6,7 @@
       </div>
     </div>
 
-    <div class="col-md-12 px-5 py-3 mx-auto rounded-lg bg-white">
+    <div class="col-md-12 px-5 pb-3 pt-5 mx-auto rounded-lg bg-white">
       <table class="table table-borderless">
         <tr>
           <th style="width:10%">購入者</th>
@@ -81,11 +81,27 @@
           <th>送料</th>
           <td class="text-end"><%= @order.postage.to_s(:delimited) %></td>
         </tr>
-        <tr>
-          <th>請求金額合計</th>
-          <th class="text-end"><%= @order.billing_amount.to_s(:delimited) %>円</th>
-        </tr>
-      </table>
-    </div>
+
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4 px-5 pb-5 mx-auto rounded-lg bg-white">
+    <table class="col-md-12 table table-borderless">
+      <tr>
+        <th style="width:30%">商品合計</th>
+        <td style="width:30%"><%= (@order.billing_amount - 800).to_s(:delimited) %></td>
+      </tr>
+      <tr>
+        <th>送料</th>
+        <td class="text-end"><%= @order.postage.to_s(:delimited) %></td>
+      </tr>
+      <tr>
+        <th>請求金額合計</th>
+        <th class="text-end"><%= @order.billing_amount.to_s(:delimited) %>円</th>
+      </tr>
+    </table>
+
   </div>
 </div>
