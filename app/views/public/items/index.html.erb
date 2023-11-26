@@ -25,7 +25,7 @@
               <%= image_tag item.image, size: "165x165", class: "w-100 rounded-lg" %>
             <% end %>
             <p class="mt-2 mb-0"><%= item.name %></p>
-            <span><%= number_to_currency(item.tax_included_price, unit: "¥", strip_insignificant_zeros: true) %></span>
+            <span>￥<%= (item.tax_included_price * 1.1).floor %></span>
           </div>
           <% end %>
         </div>
