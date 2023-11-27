@@ -1,0 +1,82 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-9 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0"><%= @customer.family_name %> <%= @customer.last_name %> さんの会員情報編集</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-9 bg-white p-5 mx-auto rounded-lg">
+      <%= form_with model: @customer, url: admin_customer_path(id: @customer.id), method: :patch do |f| %>
+      <table>
+        <tr>
+          <th>会員ID</th>
+          <td></td>
+          <th><%= @customer.id %></th>
+          <!--<td><%#= f.text_field :id , class:"form-control"%></td>-->
+        </tr>
+
+        <tr>
+          <th>名前</th>
+          <th><%= f.label :"(姓)" %></th>
+          <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
+          <th><%= f.label :"(名)" %></th>
+          <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
+        </tr>
+
+        <tr>
+          <th>フリガナ</th>
+          <th><%= f.label :"(セイ)" %></th>
+          <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
+          <th><%= f.label :"(メイ)" %></th>
+          <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %></td>
+        </tr>
+
+        <tr>
+          <th>郵便番号</th>
+          <td></td>
+          <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
+        </tr>
+
+        <tr>
+          <th>住所</th>
+          <td></td>
+          <td><%= f.text_field :address, :size=>"40", autofocus: true, autocomplete: "address" %></td>
+        </tr>
+
+        <tr>
+          <th>電話番号</th>
+          <td></td>
+          <td><%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %></td>
+        </tr>
+
+        <tr>
+          <th>メールアドレス</th>
+          <td></td>
+          <td><%= f.text_field :email, autofocus: true, autocomplete: "email" %></td>
+        </tr>
+
+        <tr>
+          <th>会員ステータス</th>
+          <td></td>
+          <!--<td><%#= f.select :is_active, [["有効会員","false"], ["退会済み","true"]], class:"form-control" %></td>-->
+          <td>
+            <%= f.radio_button :is_active, true, id: "customer_is_active_true" %>
+            <%= f.label :is_active_true, "退会済み", { value: :true, style: "display: inline-block;", for: "customer_is_active_true" } %>
+            <%= f.radio_button :is_active, false, id: "customer_is_active_false" %>
+            <%= f.label :is_active_false, "有効会員", { value: :false, style: "display: inline-block;", for: "customer_is_active_false" } %>
+          </td>
+        </tr>
+      </table>
+
+          <div class="mt-2">
+            <%= f.submit "変更を保存する" ,class: "btn btn-success " %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,57 @@
-<h1>Admin::Items#edit</h1>
-<p>Find me in app/views/admin/items/edit.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-10 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">商品編集</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-10 bg-white p-5 mx-auto rounded-lg">
+
+      <%= form_with model: @item, url: admin_item_path(@item),　method: :patch, local: true, class: "xl:w-8/12 md:w-10/12", data: { turbo: false } do |f| %>
+        <%= render "admin/shared/error_messages", resource: @item %>
+         <table class="table table-borderless">
+          <tr>
+            <th scope="col" class="mt-2 mb-2"><%= f.label :image, "商品画像" %></th>
+            <td><%= f.file_field :image, required: true %></td>
+          </tr>
+          <tr>
+            <th scope="col" class="mb-2"><%= f.label :name, "商品名" %></th>
+            <td><%= f.text_field :name, placeholder: "商品名", class: "form-control", required: true %></td>
+          </tr>
+          <tr>
+            <th scope="col" class="mb-2"><%= f.label :introduction, "商品説明" %></th>
+            <td><%= f.text_area :introduction, rows: "5", placeholder: "ここに説明文を記述します", class: "form-control", required: true %></td>
+          </tr>
+          <tr>
+            <th scope="col" class="mb-2"><%= f.label :genre_id, "ジャンル" %></th>
+            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select", required: true %></td>
+          </tr>
+          <tr>
+            <th scope="col" class="mb-2"><%= f.label :tax_included_price, "税抜価格" %></th>
+            <td><%= f.number_field :tax_included_price, placeholder: "1000", class: "form-control", required: true %></td>
+            <td>円</td>
+          </tr>
+          <tr>
+            <th scope="col" class="mb-2"><%= f.label :is_saled, "販売ステータス" %></th>
+            <td>
+              <%= f.radio_button :is_saled, true, id: "item_is_saled_true" %>
+              <%= f.label :is_saled_true, "販売中", { value: :true, style: "display: inline-block;", for: "item_is_saled_true" } %>
+              <%= f.radio_button :is_saled, false, id: "item_is_saled_false" %>
+              <%= f.label :is_saled_false, "販売停止中", { value: :false, style: "display: inline-block;", for: "item_is_saled_false" } %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+          </tr>
+        </table>
+      <% end %>
+
+    </div>
+  </div>
+</div>

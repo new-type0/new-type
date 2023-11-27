@@ -1,0 +1,55 @@
+<header class="bg-white">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-2">
+        <h1 class="mb-0"><a class="navbar-brand text-dark" href="/"><img src="<%= asset_path('logo.png') %>", style="height:70px"></a></h1>
+      </div>
+
+      <div class="col-md-10">
+        <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+            <nav class="navbar navbar-expand-lg navbar-dark p-0">
+              <ul class="nav_color navbar-nav">
+              <% if customer_signed_in? %>
+
+                <!--顧客ログイン時 -->
+                <li class=" text-dark pt-2 pr-4">ようこそ<%= current_customer.family_name + current_customer.last_name %>さん！</li>
+                <li><%= link_to "マイページ", public_customers_my_page_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "商品一覧", public_items_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "カート", public_cart_items_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, url: customer_session_path, class: 'nav-link text-dark' %></li>
+
+              <% elsif admin_signed_in? %>
+
+                <!-- 管理者ログイン時 -->
+                <li><%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "会員一覧", admin_customers_index_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "注文履歴一覧", admin_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "アバウト", public_about_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, url: admin_session_path, class: 'nav-link text-dark' %></li>
+
+              <% else %>
+
+                <!-- ログアウト時 -->
+                <li><%= link_to "商品一覧", public_items_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "アバウト", public_about_path, class: 'nav-link text-dark' %></li>
+                <li><%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %></li>
+              <% end %>
+            </ul>
+        </nav>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-end">
+            <form class="mr-0">
+              <div class="search"><p>　Search</p></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>

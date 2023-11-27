@@ -13,3 +13,68 @@
  *= require_tree .
  *= require_self
  */
+ body {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+ main {
+   flex: 1;
+   margin-bottom: 50px;
+}
+
+footer {
+   margin-top: auto;
+}
+
+ h2, h3, .nav_color li, .genre_title {
+   font-family: 'Zen Maru Gothic', serif;
+   font-weight: 700;
+   color: #492e06;
+ }
+
+ .mv {
+  width: 100%;
+  height: 600px;
+  background-image: url(assets/mv.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.mv img {
+  width: 100%;
+}
+
+.mark img {
+  width: 50px;
+}
+
+.mv_text {
+  font-size: 44px;
+}
+
+.title_border {
+  border-top: 2px solid #492e06;
+  border-bottom: 2px solid #492e06;
+}
+
+.thanks {
+  height: 300px;
+  background-image: url(assets/mark.png);
+  background-size: 200px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.search{
+  height: 26px;
+  width: 200px;
+  border: 2px solid #492e06;
+  color: #C3C3C3;
+  border-radius: 10px;
+}
+
+.search p {
+  padding-bottom: 3px;
+}

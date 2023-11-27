@@ -1,2 +1,70 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-9 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">注文履歴詳細</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div "container">
+  <div class='row bg-white py-4 mx-5 rounded-lg'>
+    <div class='col-6 offset-1'>
+      <h4>注文情報</h4>
+      <table class='table table-bordered border-dark'>
+        <tr><th class="table-secondary">注文日</th>
+           <td style="width: 78%;"><%= @order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+          </tr>
+          <tr><th class="table-secondary">配送先</th>
+            <td>〒<%= @order.shipping_postal_code %><br>
+                  <%= @order.shipping_address %><br>
+                  <%= @order.shipping_name %>
+            </td>
+          </tr>
+          <tr><th class="table-secondary">支払方法</th>
+            <td><%= t("enums.order.payment_method.#{@order.payment_method}") %></td>
+          </tr>
+          <tr><th class="table-secondary">ステータス</th>
+            <td><%= t("enums.order.order_status.#{@order.order_status}") %></td>
+          </tr>
+        </th>
+      </table>
+    </div>
+
+    <div class='col-4'>
+      <h4>請求情報</h4>
+      <table class="table table-bordered border-dark">
+        <tr><th class="table-secondary">商品合計</th>
+        <td style="width: 65%;"><%= @subtotal.to_i %></td></tr>
+        <tr><th class="table-secondary">送料</th>
+        <td><%= @order.postage %></td></tr>
+        <tr><th class="table-secondary">ご請求額</th>
+        <td><%= @order.billing_amount %></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class='row bg-white mx-5 rounded-lg'>
+    <div class='col-7 offset-1'>
+      <h4>注文内容</h4>
+      <table class='table table-bordered border-dark'>
+        <tr class="table-secondary">
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+        <% total = 0 %>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+            <td style="width: 55%;"><%= order_detail.item.name %></td>
+            <td style="width: 20%;"><%= order_detail.tax_included_price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.amount * order_detail.tax_included_price %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+

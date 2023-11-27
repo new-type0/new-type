@@ -1,2 +1,42 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="mv d-flex align-items-center justify-content-center mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 py-5 pl-5 ml-auto bg-white rounded-left">
+        <h2 class="mv_text">ようこそ NAGANO CAKE へ！</h2>
+        <p class="mb-0">
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。
+        </p>
+      </div>
+      <div class="col-md-2 py-3 bg-white mr-auto rounded-right">
+        <img src="assets/mark.png">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3 px-0'>
+      <%= render 'layouts/search', genres: @genres %>
+    </div>
+
+      <div class='col-md-8 offset-md-1 px-0'>
+        <div class='title_border text-center pt-1 pb-1 mb-4'>
+          <h3 class='mb-0'>新着商品</h3>
+        </div>
+        <div class='row'>
+            <% @items.last(4).each do |item| %>
+            <div class='col-md-3'>
+              <%= link_to public_item_path(item.id) do %>
+                <%= image_tag item.image, size: "165x165", class: "w-100 rounded-lg" %>
+              <% end %>
+              <p class="mt-2 mb-0"><%= item.name %></p>
+              <span><%= number_to_currency(item.tax_included_price, unit: "¥", strip_insignificant_zeros: true) %></span>
+            </div>
+            <% end %>
+            </div>
+          <p class="text-right"><%= link_to "もっと見る▶︎", public_items_path %></p>
+      </div>
+  </div>
+</div>

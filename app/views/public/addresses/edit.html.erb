@@ -1,2 +1,39 @@
-<h1>Public::Addresses#edit</h1>
-<p>Find me in app/views/public/addresses/edit.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-12 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">配送先編集</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container bg-white p-4 rounded-lg">
+  <div class="col-md-12">
+    <%= form_for @address, url: public_address_path(@address), method: :patch do |f| %>
+      <div class="form-group row mt-3">
+        <%= f.label :address_postal_code, "郵便番号（ハイフンなし）", class: "col-3 col-form-label" %>
+        <div class="col-3">
+          <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control", required: true %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :address, "住所", class: "col-3 col-form-label" %>
+        <div class="col-6">
+          <%= f.text_field :address, placeholder: "高知県", class: "form-control", required: true %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :address_name, "宛名", class: "col-3 col-form-label" %>
+        <div class="col-3">
+          <%= f.text_field :name, placeholder: "鳴瀬タカシ", class: "form-control", required: true %>
+        </div>
+        <div class="col-3 offset-3">
+          <%= f.submit "変更内容を保存", class: "btn btn-success" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

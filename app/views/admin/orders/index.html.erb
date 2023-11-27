@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0">注文履歴一覧</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 bg-white p-5 mx-auto rounded-lg">
+      <table  class="table table-hover">
+        <thead>
+          <tr class="table-active">
+
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文個数</th>
+            <th>注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order) %></td>
+              <td><%= order.customer.family_name %> <%= order.customer.last_name %></td>
+              <td><%= order.order_details.sum(:amount) %></td>
+              <td><%= order.order_status_i18n %></td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+</div>
