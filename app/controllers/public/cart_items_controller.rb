@@ -1,6 +1,6 @@
 class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_cart_item, only: %i[ create update destroy destroy_all]
+  before_action :set_cart_item, only: %i[ create update]
 
   def index
     @cart_items = current_customer.cart_items.all
@@ -47,7 +47,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def set_cart_item
-    @cart_item = current_customer.cart_items.find_by(params[:item_id])
+    @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
   end
 
   # def increase_or_create(item_id)
